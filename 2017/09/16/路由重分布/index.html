@@ -96,19 +96,19 @@
 
 
 
-<meta name="description" content="重分布就是把两个不同协议的网络进行打通，top图如下">
+<meta name="description" content="重分布就是把两个不同协议的网络进行打通，top图如下  重分布的详细配置">
 <meta name="keywords" content="华为">
 <meta property="og:type" content="article">
 <meta property="og:title" content="路由的重分布">
 <meta property="og:url" content="http://yoursite.com/2017/09/16/路由重分布/index.html">
 <meta property="og:site_name" content="MyLife">
-<meta property="og:description" content="重分布就是把两个不同协议的网络进行打通，top图如下">
+<meta property="og:description" content="重分布就是把两个不同协议的网络进行打通，top图如下  重分布的详细配置">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/XoUYa0m.png">
-<meta property="og:updated_time" content="2017-09-16T07:23:47.325Z">
+<meta property="og:updated_time" content="2017-09-16T07:30:54.890Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="路由的重分布">
-<meta name="twitter:description" content="重分布就是把两个不同协议的网络进行打通，top图如下">
+<meta name="twitter:description" content="重分布就是把两个不同协议的网络进行打通，top图如下  重分布的详细配置">
 <meta name="twitter:image" content="https://i.imgur.com/XoUYa0m.png">
 
 
@@ -368,9 +368,8 @@
       
         <p>重分布就是把两个不同协议的网络进行打通，top图如下</p>
 <p><img src="https://i.imgur.com/XoUYa0m.png" alt=""></p>
-<a id="more"></a>
+<h2 id="重分布的详细配置"><a href="#重分布的详细配置" class="headerlink" title="重分布的详细配置"></a>重分布的详细配置</h2><a id="more"></a>
 <p><the rest="" of="" contents="" |="" 余下全文=""></the></p>
-<p>##重分布的详细配置</p>
 <h3 id="RIP区域配置"><a href="#RIP区域配置" class="headerlink" title="RIP区域配置"></a>RIP区域配置</h3><h4 id="AR4"><a href="#AR4" class="headerlink" title="AR4"></a>AR4</h4><pre><code>system
 int g0/0/1
 ip add 192.168.1.2 255.255.255.0
@@ -425,7 +424,7 @@ version 2
 import-route ospf 1 cost 10
 ospf 1
 import-route rip 1 cost 10
-</code></pre><p>###重分布的知识点<br>   需在两个不同协议的区域的边界路由器上配置重分布的命令，首先要进入协议模式下（ospf/rip），比如先进入rip，就在rip模式下重分布ospf协议（import-route ospf 1 cost 10），其中数字1为进程号，数字10为跳数，也就是从两个网络的末端到达另外这个网络的跳数；然后再进入ospf模式中，如上相同。</p>
+</code></pre><h3 id="重分布的知识点"><a href="#重分布的知识点" class="headerlink" title="重分布的知识点"></a>重分布的知识点</h3><p>   需在两个不同协议的区域的边界路由器上配置重分布的命令，首先要进入协议模式下（ospf/rip），比如先进入rip，就在rip模式下重分布ospf协议（import-route ospf 1 cost 10），其中数字1为进程号，数字10为跳数，也就是从两个网络的末端到达另外这个网络的跳数；然后再进入ospf模式中，如上相同。</p>
 
       
     </div>
@@ -674,7 +673,7 @@ import-route rip 1 cost 10
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#RIP区域配置"><span class="nav-number">1.</span> <span class="nav-text">RIP区域配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AR4"><span class="nav-number">1.1.</span> <span class="nav-text">AR4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AR5"><span class="nav-number">1.2.</span> <span class="nav-text">AR5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AR6"><span class="nav-number">1.3.</span> <span class="nav-text">AR6</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OSPF区域配置"><span class="nav-number">2.</span> <span class="nav-text">OSPF区域配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AR6-1"><span class="nav-number">2.1.</span> <span class="nav-text">AR6</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AR7"><span class="nav-number">2.2.</span> <span class="nav-text">AR7</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AR8"><span class="nav-number">2.3.</span> <span class="nav-text">AR8</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重分布的配置"><span class="nav-number">3.</span> <span class="nav-text">重分布的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AR6-2"><span class="nav-number">3.1.</span> <span class="nav-text">AR6</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#重分布的详细配置"><span class="nav-number">1.</span> <span class="nav-text">重分布的详细配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RIP区域配置"><span class="nav-number">1.1.</span> <span class="nav-text">RIP区域配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AR4"><span class="nav-number">1.1.1.</span> <span class="nav-text">AR4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AR5"><span class="nav-number">1.1.2.</span> <span class="nav-text">AR5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AR6"><span class="nav-number">1.1.3.</span> <span class="nav-text">AR6</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OSPF区域配置"><span class="nav-number">1.2.</span> <span class="nav-text">OSPF区域配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AR6-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">AR6</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AR7"><span class="nav-number">1.2.2.</span> <span class="nav-text">AR7</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AR8"><span class="nav-number">1.2.3.</span> <span class="nav-text">AR8</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重分布的配置"><span class="nav-number">1.3.</span> <span class="nav-text">重分布的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AR6-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">AR6</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重分布的知识点"><span class="nav-number">1.4.</span> <span class="nav-text">重分布的知识点</span></a></li></ol></li></ol></div>
             
 
           </div>
