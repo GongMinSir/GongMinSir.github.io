@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-09-16T07:30:54.890Z</updated>
+  <updated>2017-09-16T08:43:48.889Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>三层交换机上的VLAN间的通信</title>
+    <link href="http://yoursite.com/2017/09/16/vlan%E9%97%B4%E9%80%9A%E4%BF%A1/"/>
+    <id>http://yoursite.com/2017/09/16/vlan间通信/</id>
+    <published>2017-09-16T08:23:10.000Z</published>
+    <updated>2017-09-16T08:43:48.889Z</updated>
+    
+    <content type="html"><![CDATA[<p>使两个VLAN间进行通信</p><p><img src="https://i.imgur.com/xC4rgST.png" alt=""></p><h2 id="详细配置"><a href="#详细配置" class="headerlink" title="详细配置"></a>详细配置</h2><a id="more"></a><p><the rest="" of="" contents="" |="" 余下全文=""></the></p><h3 id="VLAN10区域配置"><a href="#VLAN10区域配置" class="headerlink" title="VLAN10区域配置"></a>VLAN10区域配置</h3><h4 id="S2"><a href="#S2" class="headerlink" title="S2"></a>S2</h4><pre><code>systemint g0/0/1port link-type accessport default vlan 10int g0/0/2port link-type trunkport trunk allow-pass vlan all</code></pre><h3 id="VLAN20区域配置"><a href="#VLAN20区域配置" class="headerlink" title="VLAN20区域配置"></a>VLAN20区域配置</h3><h4 id="S3"><a href="#S3" class="headerlink" title="S3"></a>S3</h4><pre><code>systemint g0/0/1port link-type trunkport trunk allow-pass vlan allint g0/0/2port link-type accessport default vlan 20</code></pre><h3 id="三层交换机的配置"><a href="#三层交换机的配置" class="headerlink" title="三层交换机的配置"></a>三层交换机的配置</h3><h4 id="S1"><a href="#S1" class="headerlink" title="S1"></a>S1</h4><pre><code>systemvlan 10quitvlan 20quitint vlan 10ip add 192.168.1.1 255.255.255.0quitint vlan 20ip add 192.168.2.1 255.255.255.0quitint g0/0/1port link-type trunkport trunk allow-pass vlan allquitint g0/0/2port link-type trunk port trunk allow-pass vlan all</code></pre><h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><p>   两个不同vlan间通信，三层交换机上需要创建两个vlan，通往两边的出口都设置为trunk模式（port link-type trunk;port trunk allow-pass vlan all),二层交换机上创建各自块的vlan，连接PC的方向为access模式，向上为trunk模式。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使两个VLAN间进行通信&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/xC4rgST.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;详细配置&quot;&gt;&lt;a href=&quot;#详细配置&quot; class=&quot;headerlink&quot; title=&quot;详细配置&quot;&gt;&lt;/a&gt;详细配置&lt;/h2&gt;
+    
+    </summary>
+    
+      <category term="路由" scheme="http://yoursite.com/categories/%E8%B7%AF%E7%94%B1/"/>
+    
+    
+      <category term="华为" scheme="http://yoursite.com/tags/%E5%8D%8E%E4%B8%BA/"/>
+    
+  </entry>
   
   <entry>
     <title>路由的重分布</title>
