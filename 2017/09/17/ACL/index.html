@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="huawei," />
 
 
 
@@ -96,14 +96,20 @@
 
 
 
+<meta name="description" content="TOP图 详细配置">
+<meta name="keywords" content="huawei">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MyLife">
+<meta property="og:title" content="访问控制列表（ACL）">
 <meta property="og:url" content="http://yoursite.com/2017/09/17/ACL/index.html">
 <meta property="og:site_name" content="MyLife">
+<meta property="og:description" content="TOP图 详细配置">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-17T06:15:41.754Z">
+<meta property="og:image" content="https://i.imgur.com/fOvSPGZ.png">
+<meta property="og:updated_time" content="2017-09-17T09:49:09.370Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MyLife">
+<meta name="twitter:title" content="访问控制列表（ACL）">
+<meta name="twitter:description" content="TOP图 详细配置">
+<meta name="twitter:image" content="https://i.imgur.com/fOvSPGZ.png">
 
 
 
@@ -138,7 +144,7 @@
 
 
 
-  <title> | MyLife</title>
+  <title>访问控制列表（ACL） | MyLife</title>
   
 
 
@@ -288,7 +294,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">访问控制列表（ACL）</h1>
         
 
         <div class="post-meta">
@@ -300,7 +306,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-17T14:15:41+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-17T14:23:10+08:00">
                 2017-09-17
               </time>
             
@@ -310,6 +316,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/路由/" itemprop="url" rel="index">
+                    <span itemprop="name">路由</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -338,7 +366,42 @@
       
 
       
-        
+        <h2 id="TOP图"><a href="#TOP图" class="headerlink" title="TOP图"></a>TOP图</h2><p><img src="https://i.imgur.com/fOvSPGZ.png" alt=""></p>
+<h2 id="详细配置"><a href="#详细配置" class="headerlink" title="详细配置"></a>详细配置</h2><a id="more"></a>
+<p><the rest="" of="" contents="" |="" 余下全文=""></the></p>
+<h3 id="三层交换机上的基本配置"><a href="#三层交换机上的基本配置" class="headerlink" title="三层交换机上的基本配置"></a>三层交换机上的基本配置</h3><h4 id="S1"><a href="#S1" class="headerlink" title="S1"></a>S1</h4><pre><code>system
+vlan batch 10 20 30 40
+int vlan 10
+ip add 192.168.10.1 255.255.255.0
+int g0/0/1
+port link-type access
+port default vlan 10
+
+int vlan 20
+ip add 192.168.20.1 255.255.255.0
+int g0/0/2
+port link-type access
+port default vlan 20
+
+int vlan 30
+ip add 192.168.30.1 255.255.255.0
+int g0/0/3
+port link-type access
+port default vlan 30
+
+int vlan 40
+ip add 192.168.40.1 255.255.255.0
+int g0/0/4
+port link-type access
+port default vlan 40
+</code></pre><h3 id="基本的ACL配置-服务器拒绝PC3访问"><a href="#基本的ACL配置-服务器拒绝PC3访问" class="headerlink" title="基本的ACL配置(服务器拒绝PC3访问)"></a>基本的ACL配置(服务器拒绝PC3访问)</h3><h4 id="S1-1"><a href="#S1-1" class="headerlink" title="S1"></a>S1</h4><pre><code>system
+acl 2000
+rule deny source 192.168.40.2 0.0.0.255
+quit
+int g0/0/1
+traffic-filter outbound acl 2000
+</code></pre><h3 id="高级的ACL配置-服务器拒绝PC3访问"><a href="#高级的ACL配置-服务器拒绝PC3访问" class="headerlink" title="高级的ACL配置(服务器拒绝PC3访问)"></a>高级的ACL配置(服务器拒绝PC3访问)</h3><h4 id="S1-2"><a href="#S1-2" class="headerlink" title="S1"></a>S1</h4><pre><code>未完待续~
+</code></pre>
       
     </div>
     
@@ -352,6 +415,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/huawei/" rel="tag"><i class="fa fa-tag"></i> huawei</a>
+          
+        </div>
       
 
       
@@ -445,8 +514,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -483,7 +561,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -561,6 +639,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TOP图"><span class="nav-number">1.</span> <span class="nav-text">TOP图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详细配置"><span class="nav-number">2.</span> <span class="nav-text">详细配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三层交换机上的基本配置"><span class="nav-number">2.1.</span> <span class="nav-text">三层交换机上的基本配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#S1"><span class="nav-number">2.1.1.</span> <span class="nav-text">S1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本的ACL配置-服务器拒绝PC3访问"><span class="nav-number">2.2.</span> <span class="nav-text">基本的ACL配置(服务器拒绝PC3访问)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#S1-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">S1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级的ACL配置-服务器拒绝PC3访问"><span class="nav-number">2.3.</span> <span class="nav-text">高级的ACL配置(服务器拒绝PC3访问)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#S1-2"><span class="nav-number">2.3.1.</span> <span class="nav-text">S1</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
