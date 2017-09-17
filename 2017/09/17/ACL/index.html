@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="华为," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -96,20 +96,14 @@
 
 
 
-<meta name="description" content="TOP图 详细配置">
-<meta name="keywords" content="华为">
 <meta property="og:type" content="article">
-<meta property="og:title" content="三层交换机上的VLAN间的通信">
-<meta property="og:url" content="http://yoursite.com/2017/09/16/vlan间通信/index.html">
+<meta property="og:title" content="MyLife">
+<meta property="og:url" content="http://yoursite.com/2017/09/17/ACL/index.html">
 <meta property="og:site_name" content="MyLife">
-<meta property="og:description" content="TOP图 详细配置">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/xC4rgST.png">
-<meta property="og:updated_time" content="2017-09-16T08:47:06.983Z">
+<meta property="og:updated_time" content="2017-09-17T06:15:41.754Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="三层交换机上的VLAN间的通信">
-<meta name="twitter:description" content="TOP图 详细配置">
-<meta name="twitter:image" content="https://i.imgur.com/xC4rgST.png">
+<meta name="twitter:title" content="MyLife">
 
 
 
@@ -138,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/09/16/vlan间通信/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/09/17/ACL/"/>
 
 
 
 
 
-  <title>三层交换机上的VLAN间的通信 | MyLife</title>
+  <title> | MyLife</title>
   
 
 
@@ -277,7 +271,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/16/vlan间通信/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/17/ACL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gong Min">
@@ -294,7 +288,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">三层交换机上的VLAN间的通信</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -306,8 +300,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-16T16:23:10+08:00">
-                2017-09-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-17T14:15:41+08:00">
+                2017-09-17
               </time>
             
 
@@ -316,28 +310,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/路由/" itemprop="url" rel="index">
-                    <span itemprop="name">路由</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -366,43 +338,7 @@
       
 
       
-        <h2 id="TOP图"><a href="#TOP图" class="headerlink" title="TOP图"></a>TOP图</h2><p><img src="https://i.imgur.com/xC4rgST.png" alt=""></p>
-<h2 id="详细配置"><a href="#详细配置" class="headerlink" title="详细配置"></a>详细配置</h2><a id="more"></a>
-<p><the rest="" of="" contents="" |="" 余下全文=""></the></p>
-<h3 id="VLAN10区域配置"><a href="#VLAN10区域配置" class="headerlink" title="VLAN10区域配置"></a>VLAN10区域配置</h3><h4 id="S2"><a href="#S2" class="headerlink" title="S2"></a>S2</h4><pre><code>system
-int g0/0/1
-port link-type access
-port default vlan 10
-int g0/0/2
-port link-type trunk
-port trunk allow-pass vlan all
-</code></pre><h3 id="VLAN20区域配置"><a href="#VLAN20区域配置" class="headerlink" title="VLAN20区域配置"></a>VLAN20区域配置</h3><h4 id="S3"><a href="#S3" class="headerlink" title="S3"></a>S3</h4><pre><code>system
-int g0/0/1
-port link-type trunk
-port trunk allow-pass vlan all
-int g0/0/2
-port link-type access
-port default vlan 20
-</code></pre><h3 id="三层交换机的配置"><a href="#三层交换机的配置" class="headerlink" title="三层交换机的配置"></a>三层交换机的配置</h3><h4 id="S1"><a href="#S1" class="headerlink" title="S1"></a>S1</h4><pre><code>system
-vlan 10
-quit
-vlan 20
-quit
-int vlan 10
-ip add 192.168.1.1 255.255.255.0
-quit
-int vlan 20
-ip add 192.168.2.1 255.255.255.0
-quit
-int g0/0/1
-port link-type trunk
-port trunk allow-pass vlan all
-quit
-int g0/0/2
-port link-type trunk 
-port trunk allow-pass vlan all
-</code></pre><h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><p>   两个不同vlan间通信，三层交换机上需要创建两个vlan，通往两边的出口都设置为trunk模式（port link-type trunk;port trunk allow-pass vlan all),二层交换机上创建各自块的vlan，连接PC的方向为access模式，向上为trunk模式。</p>
-
+        
       
     </div>
     
@@ -417,12 +353,6 @@ port trunk allow-pass vlan all
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/华为/" rel="tag"><i class="fa fa-tag"></i> 华为</a>
-          
-        </div>
-      
 
       
       
@@ -432,8 +362,8 @@ port trunk allow-pass vlan all
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/16/三层交换机作为DHCP服务器/" rel="next" title="三层交换机作为DHCP服务器">
-                <i class="fa fa-chevron-left"></i> 三层交换机作为DHCP服务器
+              <a href="/2017/09/16/vlan间通信/" rel="next" title="三层交换机上的VLAN间的通信">
+                <i class="fa fa-chevron-left"></i> 三层交换机上的VLAN间的通信
               </a>
             
           </div>
@@ -441,10 +371,6 @@ port trunk allow-pass vlan all
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/17/ACL/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -519,17 +445,8 @@ port trunk allow-pass vlan all
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -644,22 +561,6 @@ port trunk allow-pass vlan all
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TOP图"><span class="nav-number">1.</span> <span class="nav-text">TOP图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详细配置"><span class="nav-number">2.</span> <span class="nav-text">详细配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VLAN10区域配置"><span class="nav-number">2.1.</span> <span class="nav-text">VLAN10区域配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#S2"><span class="nav-number">2.1.1.</span> <span class="nav-text">S2</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VLAN20区域配置"><span class="nav-number">2.2.</span> <span class="nav-text">VLAN20区域配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#S3"><span class="nav-number">2.2.1.</span> <span class="nav-text">S3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三层交换机的配置"><span class="nav-number">2.3.</span> <span class="nav-text">三层交换机的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#S1"><span class="nav-number">2.3.1.</span> <span class="nav-text">S1</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点"><span class="nav-number">3.</span> <span class="nav-text">知识点</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
