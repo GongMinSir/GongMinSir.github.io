@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-09-17T09:55:56.437Z</updated>
+  <updated>2017-09-19T10:36:21.386Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,17 +17,42 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>网络地址转换</title>
+    <link href="http://yoursite.com/2017/09/19/NAT/"/>
+    <id>http://yoursite.com/2017/09/19/NAT/</id>
+    <published>2017-09-19T10:33:10.000Z</published>
+    <updated>2017-09-19T10:36:21.386Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="TOP图"><a href="#TOP图" class="headerlink" title="TOP图"></a>TOP图</h2><p><img src="https://i.imgur.com/9PeSX6X.png" alt=""></p><p>简介：蓝色区域为内网，外边是外网，R1是边缘路由器。</p><h2 id="详细配置"><a href="#详细配置" class="headerlink" title="详细配置"></a>详细配置</h2><a id="more"></a><p><the rest="" of="" contents="" |="" 余下全文=""></the></p><h3 id="静态NAT"><a href="#静态NAT" class="headerlink" title="静态NAT"></a>静态NAT</h3><h4 id="S1"><a href="#S1" class="headerlink" title="S1"></a>S1</h4><pre><code>systemvlan batch 10 20 100int vlan 10ip add 192.168.1.1 255.255.255.0quitint vlan 20ip add 192.168.2.1 255.255.255.0quitint vlan 100ip add 192.168.3.1 255.255.255.0quitint g0/0/1port link-type accessport default vlan 100quitint g0/0/2port link-type accessport default vlan 10quitint g0/0/3port link-type accessport default vlan 20quit ospf 1area 0network 192.168.1.0 255.255.255.0network 192.168.2.0 255.255.255.0network 192.168.3.0 255.255.255.0quit</code></pre><h4 id="R1"><a href="#R1" class="headerlink" title="R1"></a>R1</h4><pre><code>systemint g0/0/1ip add 192.168.3.2 255.255.255.0quit int g0/0/0ip add 2.2.2.1 255.255.255.0quitospf 1area 0netwokr 192.168.3.0 255.255.255.0quitip route-static 0.0.0.0 0.0.0.0 2.2.2.2ospf 1default-route-advertise alwaysquit两个公网地址：100.100.100.15/24100.100.100.20/24int g0/0/0nat static global 100.100.100.15 inside 192.168.1.2nat static global 100.100.100.20 inside 192.168.2.2</code></pre><h4 id="R3"><a href="#R3" class="headerlink" title="R3"></a>R3</h4><pre><code>systemint g0/0/0ip add 2.2.2.2 255.255.255.0quitint g0/0/1ip add 3.3.3.1 255.255.255.0quitip route-static 100.100.100.15 255.255.255.0 2.2.2.1ip route-static 100.100.100.20 255.255.255.0 2.2.2.1</code></pre><h3 id="动态NAT"><a href="#动态NAT" class="headerlink" title="动态NAT"></a>动态NAT</h3><p>（S1和R1、R3基本配置就不再写出）</p><h4 id="R1-1"><a href="#R1-1" class="headerlink" title="R1"></a>R1</h4><pre><code>公网地址：100.100.100.0/24nat address-group 1 100.100.100.1 100.100.100.254acl 2000rule permit source 192.168.0.0 0.0.255.255quitint g0/0/0nat outbound 2000 address-group 1 no-pat</code></pre><h4 id="R3-1"><a href="#R3-1" class="headerlink" title="R3"></a>R3</h4><pre><code>ip route-static 100.100.100.0 255.255.255.0 2.2.2.1</code></pre><h3 id="PAT-有一个公网地址"><a href="#PAT-有一个公网地址" class="headerlink" title="PAT(有一个公网地址)"></a>PAT(有一个公网地址)</h3><h4 id="R1-2"><a href="#R1-2" class="headerlink" title="R1"></a>R1</h4><pre><code>公网地址：100.100.100.30nat address-group 1 100.100.100.30 100.100.100.30acl 2000rule permit source 192.168.0.0 0.0.255.255quitint g0/0/0nat outbound 2000 address-group 1</code></pre><h4 id="R3-2"><a href="#R3-2" class="headerlink" title="R3"></a>R3</h4><pre><code>ip route-static 100.100.100.30 255.255.255.0 2.2.2.1</code></pre><h3 id="PAT-只有外网接口"><a href="#PAT-只有外网接口" class="headerlink" title="PAT(只有外网接口)"></a>PAT(只有外网接口)</h3><h4 id="R1-3"><a href="#R1-3" class="headerlink" title="R1"></a>R1</h4><pre><code>acl 2000rule permit source 192.168.0.0 0.0.255.255quitint g0/0/0nat outbound 2000</code></pre><h4 id="R3-3"><a href="#R3-3" class="headerlink" title="R3"></a>R3</h4><pre><code>ip route-static 2.2.2.0 255.255.255.0 2.2.2.1</code></pre><h3 id="静态端口映射"><a href="#静态端口映射" class="headerlink" title="静态端口映射"></a>静态端口映射</h3><p>在PAT的基础上输入如下命令：</p><h4 id="R1-4"><a href="#R1-4" class="headerlink" title="R1"></a>R1</h4><pre><code>int g0/0/0 nat static protocol tcp global current-interface telnet inside 192.168.1.2telnet__(将当前接口的23端口映射到192.168.1.2的23端口，这里输出端口号或者协议都可以)</code></pre><p>完结~</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;TOP图&quot;&gt;&lt;a href=&quot;#TOP图&quot; class=&quot;headerlink&quot; title=&quot;TOP图&quot;&gt;&lt;/a&gt;TOP图&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/9PeSX6X.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;简介：蓝色区域为内网，外边是外网，R1是边缘路由器。&lt;/p&gt;
+&lt;h2 id=&quot;详细配置&quot;&gt;&lt;a href=&quot;#详细配置&quot; class=&quot;headerlink&quot; title=&quot;详细配置&quot;&gt;&lt;/a&gt;详细配置&lt;/h2&gt;
+    
+    </summary>
+    
+      <category term="路由" scheme="http://yoursite.com/categories/%E8%B7%AF%E7%94%B1/"/>
+    
+    
+      <category term="HUAWEI" scheme="http://yoursite.com/tags/HUAWEI/"/>
+    
+  </entry>
+  
+  <entry>
     <title>访问控制列表（ACL）</title>
     <link href="http://yoursite.com/2017/09/17/ACL/"/>
     <id>http://yoursite.com/2017/09/17/ACL/</id>
     <published>2017-09-17T06:23:10.000Z</published>
-    <updated>2017-09-17T09:55:56.437Z</updated>
+    <updated>2017-09-19T06:42:53.557Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="TOP图"><a href="#TOP图" class="headerlink" title="TOP图"></a>TOP图</h2><p><img src="https://i.imgur.com/fOvSPGZ.png" alt=""></p><h2 id="详细配置"><a href="#详细配置" class="headerlink" title="详细配置"></a>详细配置</h2><a id="more"></a><p><the rest="" of="" contents="" |="" 余下全文=""></the></p><h3 id="三层交换机上的基本配置"><a href="#三层交换机上的基本配置" class="headerlink" title="三层交换机上的基本配置"></a>三层交换机上的基本配置</h3><h4 id="S1"><a href="#S1" class="headerlink" title="S1"></a>S1</h4><pre><code>systemvlan batch 10 20 30 40int vlan 10ip add 192.168.10.1 255.255.255.0int g0/0/1port link-type accessport default vlan 10int vlan 20ip add 192.168.20.1 255.255.255.0int g0/0/2port link-type accessport default vlan 20int vlan 30ip add 192.168.30.1 255.255.255.0int g0/0/3port link-type accessport default vlan 30int vlan 40ip add 192.168.40.1 255.255.255.0int g0/0/4port link-type accessport default vlan 40</code></pre><h3 id="基本的ACL配置-服务器拒绝PC3访问"><a href="#基本的ACL配置-服务器拒绝PC3访问" class="headerlink" title="基本的ACL配置(服务器拒绝PC3访问)"></a>基本的ACL配置(服务器拒绝PC3访问)</h3><h4 id="S1-1"><a href="#S1-1" class="headerlink" title="S1"></a>S1</h4><pre><code>systemacl 2000rule deny source 192.168.40.2 0.0.0.255quitint g0/0/1traffic-filter outbound acl 2000</code></pre><h3 id="高级的ACL配置-服务器拒绝PC3访问"><a href="#高级的ACL配置-服务器拒绝PC3访问" class="headerlink" title="高级的ACL配置(服务器拒绝PC3访问)"></a>高级的ACL配置(服务器拒绝PC3访问)</h3><h4 id="S1-2"><a href="#S1-2" class="headerlink" title="S1"></a>S1</h4><pre><code>未完待续~</code></pre>]]></content>
+    <content type="html"><![CDATA[<h2 id="TOP图"><a href="#TOP图" class="headerlink" title="TOP图"></a>TOP图</h2><p><img src="https://i.imgur.com/fOvSPGZ.png" alt=""></p><p>简介：使vlan20可以访问服务器，vlan30不可以访问服务器，vlan40能访问服务器，但是不能访问服务器的WWW服务。</p><h2 id="详细配置"><a href="#详细配置" class="headerlink" title="详细配置"></a>详细配置</h2><a id="more"></a><p><the rest="" of="" contents="" |="" 余下全文=""></the></p><h3 id="三层交换机上的基本配置"><a href="#三层交换机上的基本配置" class="headerlink" title="三层交换机上的基本配置"></a>三层交换机上的基本配置</h3><h4 id="S1"><a href="#S1" class="headerlink" title="S1"></a>S1</h4><pre><code>systemvlan batch 10 20 30 40int vlan 10ip add 192.168.10.1 255.255.255.0int g0/0/1port link-type accessport default vlan 10int vlan 20ip add 192.168.20.1 255.255.255.0int g0/0/2port link-type accessport default vlan 20int vlan 30ip add 192.168.30.1 255.255.255.0int g0/0/3port link-type accessport default vlan 30int vlan 40ip add 192.168.40.1 255.255.255.0int g0/0/4port link-type accessport default vlan 40</code></pre><h3 id="基本的ACL配置-服务器拒绝PC3访问"><a href="#基本的ACL配置-服务器拒绝PC3访问" class="headerlink" title="基本的ACL配置(服务器拒绝PC3访问)"></a>基本的ACL配置(服务器拒绝PC3访问)</h3><h4 id="S1-1"><a href="#S1-1" class="headerlink" title="S1"></a>S1</h4><pre><code>systemacl 2000rule deny source 192.168.40.2 0.0.0.255quitint g0/0/1traffic-filter outbound acl 2000</code></pre><h3 id="高级的ACL配置-服务器拒绝PC3访问"><a href="#高级的ACL配置-服务器拒绝PC3访问" class="headerlink" title="高级的ACL配置(服务器拒绝PC3访问)"></a>高级的ACL配置(服务器拒绝PC3访问)</h3><h4 id="S1-2"><a href="#S1-2" class="headerlink" title="S1"></a>S1</h4><pre><code>systemacl 3000rule permit ip source 192.168.20.0 0.0.0.255 destination 192.168.10.0 0.0.0.255rule deny ip source 192.168.30.0 0.0.0.255 destination 192.168.10.0 0.0.0.255 rule deny tcp source 192.168.40.0 0.0.0.255 destination 192.168.10.2 0.0.0.0 destination-port eq 80rule permit ip source anyint g0/0/2traffic-filter inbound acl 3000int g0/0/3traffic-filter inbound acl 3000int g0/0/4traffic-filter inbound acl 3000</code></pre><h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><p><img src="https://i.imgur.com/xG9zSjf.png" alt=""></p><p><img src="https://i.imgur.com/ysf7hHR.png" alt=""></p><p><img src="https://i.imgur.com/OYywgLL.png" alt=""></p><h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><p>在华为中，acl编号2000~2999为基本的ACL，编号为3000~3999为高级的ACL，在规则rule中，可以自己手配规则号，也可以不配，不配的话系统会自动生成规则号。</p>]]></content>
     
     <summary type="html">
     
       &lt;h2 id=&quot;TOP图&quot;&gt;&lt;a href=&quot;#TOP图&quot; class=&quot;headerlink&quot; title=&quot;TOP图&quot;&gt;&lt;/a&gt;TOP图&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/fOvSPGZ.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;简介：使vlan20可以访问服务器，vlan30不可以访问服务器，vlan40能访问服务器，但是不能访问服务器的WWW服务。&lt;/p&gt;
 &lt;h2 id=&quot;详细配置&quot;&gt;&lt;a href=&quot;#详细配置&quot; class=&quot;headerlink&quot; title=&quot;详细配置&quot;&gt;&lt;/a&gt;详细配置&lt;/h2&gt;
     
     </summary>

@@ -96,19 +96,22 @@
 
 
 
-<meta name="description" content="TOP图 详细配置">
+<meta name="description" content="TOP图 简介：使vlan20可以访问服务器，vlan30不可以访问服务器，vlan40能访问服务器，但是不能访问服务器的WWW服务。 详细配置">
 <meta name="keywords" content="HUAWEI">
 <meta property="og:type" content="article">
 <meta property="og:title" content="访问控制列表（ACL）">
 <meta property="og:url" content="http://yoursite.com/2017/09/17/ACL/index.html">
 <meta property="og:site_name" content="MyLife">
-<meta property="og:description" content="TOP图 详细配置">
+<meta property="og:description" content="TOP图 简介：使vlan20可以访问服务器，vlan30不可以访问服务器，vlan40能访问服务器，但是不能访问服务器的WWW服务。 详细配置">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/fOvSPGZ.png">
-<meta property="og:updated_time" content="2017-09-17T09:55:56.437Z">
+<meta property="og:image" content="https://i.imgur.com/xG9zSjf.png">
+<meta property="og:image" content="https://i.imgur.com/ysf7hHR.png">
+<meta property="og:image" content="https://i.imgur.com/OYywgLL.png">
+<meta property="og:updated_time" content="2017-09-19T06:42:53.557Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="访问控制列表（ACL）">
-<meta name="twitter:description" content="TOP图 详细配置">
+<meta name="twitter:description" content="TOP图 简介：使vlan20可以访问服务器，vlan30不可以访问服务器，vlan40能访问服务器，但是不能访问服务器的WWW服务。 详细配置">
 <meta name="twitter:image" content="https://i.imgur.com/fOvSPGZ.png">
 
 
@@ -367,6 +370,7 @@
 
       
         <h2 id="TOP图"><a href="#TOP图" class="headerlink" title="TOP图"></a>TOP图</h2><p><img src="https://i.imgur.com/fOvSPGZ.png" alt=""></p>
+<p>简介：使vlan20可以访问服务器，vlan30不可以访问服务器，vlan40能访问服务器，但是不能访问服务器的WWW服务。</p>
 <h2 id="详细配置"><a href="#详细配置" class="headerlink" title="详细配置"></a>详细配置</h2><a id="more"></a>
 <p><the rest="" of="" contents="" |="" 余下全文=""></the></p>
 <h3 id="三层交换机上的基本配置"><a href="#三层交换机上的基本配置" class="headerlink" title="三层交换机上的基本配置"></a>三层交换机上的基本配置</h3><h4 id="S1"><a href="#S1" class="headerlink" title="S1"></a>S1</h4><pre><code>system
@@ -400,8 +404,23 @@ rule deny source 192.168.40.2 0.0.0.255
 quit
 int g0/0/1
 traffic-filter outbound acl 2000
-</code></pre><h3 id="高级的ACL配置-服务器拒绝PC3访问"><a href="#高级的ACL配置-服务器拒绝PC3访问" class="headerlink" title="高级的ACL配置(服务器拒绝PC3访问)"></a>高级的ACL配置(服务器拒绝PC3访问)</h3><h4 id="S1-2"><a href="#S1-2" class="headerlink" title="S1"></a>S1</h4><pre><code>未完待续~
-</code></pre>
+</code></pre><h3 id="高级的ACL配置-服务器拒绝PC3访问"><a href="#高级的ACL配置-服务器拒绝PC3访问" class="headerlink" title="高级的ACL配置(服务器拒绝PC3访问)"></a>高级的ACL配置(服务器拒绝PC3访问)</h3><h4 id="S1-2"><a href="#S1-2" class="headerlink" title="S1"></a>S1</h4><pre><code>system
+acl 3000
+rule permit ip source 192.168.20.0 0.0.0.255 destination 192.168.10.0 0.0.0.255
+rule deny ip source 192.168.30.0 0.0.0.255 destination 192.168.10.0 0.0.0.255 
+rule deny tcp source 192.168.40.0 0.0.0.255 destination 192.168.10.2 0.0.0.0 destination-port eq 80
+rule permit ip source any
+int g0/0/2
+traffic-filter inbound acl 3000
+int g0/0/3
+traffic-filter inbound acl 3000
+int g0/0/4
+traffic-filter inbound acl 3000
+</code></pre><h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><p><img src="https://i.imgur.com/xG9zSjf.png" alt=""></p>
+<p><img src="https://i.imgur.com/ysf7hHR.png" alt=""></p>
+<p><img src="https://i.imgur.com/OYywgLL.png" alt=""></p>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><p>在华为中，acl编号2000~2999为基本的ACL，编号为3000~3999为高级的ACL，在规则rule中，可以自己手配规则号，也可以不配，不配的话系统会自动生成规则号。</p>
+
       
     </div>
     
@@ -440,6 +459,10 @@ traffic-filter outbound acl 2000
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/19/NAT/" rel="prev" title="网络地址转换">
+                网络地址转换 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -539,7 +562,7 @@ traffic-filter outbound acl 2000
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -649,7 +672,7 @@ traffic-filter outbound acl 2000
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TOP图"><span class="nav-number">1.</span> <span class="nav-text">TOP图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详细配置"><span class="nav-number">2.</span> <span class="nav-text">详细配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三层交换机上的基本配置"><span class="nav-number">2.1.</span> <span class="nav-text">三层交换机上的基本配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#S1"><span class="nav-number">2.1.1.</span> <span class="nav-text">S1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本的ACL配置-服务器拒绝PC3访问"><span class="nav-number">2.2.</span> <span class="nav-text">基本的ACL配置(服务器拒绝PC3访问)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#S1-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">S1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级的ACL配置-服务器拒绝PC3访问"><span class="nav-number">2.3.</span> <span class="nav-text">高级的ACL配置(服务器拒绝PC3访问)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#S1-2"><span class="nav-number">2.3.1.</span> <span class="nav-text">S1</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TOP图"><span class="nav-number">1.</span> <span class="nav-text">TOP图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详细配置"><span class="nav-number">2.</span> <span class="nav-text">详细配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三层交换机上的基本配置"><span class="nav-number">2.1.</span> <span class="nav-text">三层交换机上的基本配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#S1"><span class="nav-number">2.1.1.</span> <span class="nav-text">S1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本的ACL配置-服务器拒绝PC3访问"><span class="nav-number">2.2.</span> <span class="nav-text">基本的ACL配置(服务器拒绝PC3访问)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#S1-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">S1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级的ACL配置-服务器拒绝PC3访问"><span class="nav-number">2.3.</span> <span class="nav-text">高级的ACL配置(服务器拒绝PC3访问)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#S1-2"><span class="nav-number">2.3.1.</span> <span class="nav-text">S1</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证"><span class="nav-number">3.</span> <span class="nav-text">验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点"><span class="nav-number">4.</span> <span class="nav-text">知识点</span></a></li></ol></div>
             
 
           </div>

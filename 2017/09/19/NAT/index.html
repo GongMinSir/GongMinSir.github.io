@@ -96,22 +96,20 @@
 
 
 
-<meta name="description" content="TOP图 详细配置">
+<meta name="description" content="TOP图 简介：蓝色区域为内网，外边是外网，R1是边缘路由器。 详细配置">
 <meta name="keywords" content="HUAWEI">
 <meta property="og:type" content="article">
-<meta property="og:title" content="三层交换机作为DHCP服务器">
-<meta property="og:url" content="http://yoursite.com/2017/09/16/三层交换机作为DHCP服务器/index.html">
+<meta property="og:title" content="网络地址转换">
+<meta property="og:url" content="http://yoursite.com/2017/09/19/NAT/index.html">
 <meta property="og:site_name" content="MyLife">
-<meta property="og:description" content="TOP图 详细配置">
+<meta property="og:description" content="TOP图 简介：蓝色区域为内网，外边是外网，R1是边缘路由器。 详细配置">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/xC4rgST.png">
-<meta property="og:image" content="https://i.imgur.com/z76eCz0.png">
-<meta property="og:image" content="https://i.imgur.com/SrkpS31.png">
-<meta property="og:updated_time" content="2017-09-17T09:55:58.690Z">
+<meta property="og:image" content="https://i.imgur.com/9PeSX6X.png">
+<meta property="og:updated_time" content="2017-09-19T10:36:21.386Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="三层交换机作为DHCP服务器">
-<meta name="twitter:description" content="TOP图 详细配置">
-<meta name="twitter:image" content="https://i.imgur.com/xC4rgST.png">
+<meta name="twitter:title" content="网络地址转换">
+<meta name="twitter:description" content="TOP图 简介：蓝色区域为内网，外边是外网，R1是边缘路由器。 详细配置">
+<meta name="twitter:image" content="https://i.imgur.com/9PeSX6X.png">
 
 
 
@@ -140,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/09/16/三层交换机作为DHCP服务器/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/09/19/NAT/"/>
 
 
 
 
 
-  <title>三层交换机作为DHCP服务器 | MyLife</title>
+  <title>网络地址转换 | MyLife</title>
   
 
 
@@ -279,7 +277,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/16/三层交换机作为DHCP服务器/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/19/NAT/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gong Min">
@@ -296,7 +294,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">三层交换机作为DHCP服务器</h1>
+          <h1 class="post-title" itemprop="name headline">网络地址转换</h1>
         
 
         <div class="post-meta">
@@ -308,8 +306,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-16T16:23:10+08:00">
-                2017-09-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-19T18:33:10+08:00">
+                2017-09-19
               </time>
             
 
@@ -368,71 +366,101 @@
       
 
       
-        <h2 id="TOP图"><a href="#TOP图" class="headerlink" title="TOP图"></a>TOP图</h2><p><img src="https://i.imgur.com/xC4rgST.png" alt=""></p>
+        <h2 id="TOP图"><a href="#TOP图" class="headerlink" title="TOP图"></a>TOP图</h2><p><img src="https://i.imgur.com/9PeSX6X.png" alt=""></p>
+<p>简介：蓝色区域为内网，外边是外网，R1是边缘路由器。</p>
 <h2 id="详细配置"><a href="#详细配置" class="headerlink" title="详细配置"></a>详细配置</h2><a id="more"></a>
 <p><the rest="" of="" contents="" |="" 余下全文=""></the></p>
-<h3 id="VLAN10区域配置"><a href="#VLAN10区域配置" class="headerlink" title="VLAN10区域配置"></a>VLAN10区域配置</h3><h4 id="S2"><a href="#S2" class="headerlink" title="S2"></a>S2</h4><pre><code>system
-int g0/0/1
-port link-type access
-port default vlan 10
-int g0/0/2
-port link-type trunk
-port trunk allow-pass vlan all
-</code></pre><h3 id="VLAN20区域配置"><a href="#VLAN20区域配置" class="headerlink" title="VLAN20区域配置"></a>VLAN20区域配置</h3><h4 id="S3"><a href="#S3" class="headerlink" title="S3"></a>S3</h4><pre><code>system
-int g0/0/1
-port link-type trunk
-port trunk allow-pass vlan all
-int g0/0/2
-port link-type access
-port default vlan 20
-</code></pre><h3 id="三层交换机的配置"><a href="#三层交换机的配置" class="headerlink" title="三层交换机的配置"></a>三层交换机的配置</h3><h4 id="S1"><a href="#S1" class="headerlink" title="S1"></a>S1</h4><pre><code>system
-vlan 10
-quit
-vlan 20
-quit
-
+<h3 id="静态NAT"><a href="#静态NAT" class="headerlink" title="静态NAT"></a>静态NAT</h3><h4 id="S1"><a href="#S1" class="headerlink" title="S1"></a>S1</h4><pre><code>system
+vlan batch 10 20 100
 int vlan 10
 ip add 192.168.1.1 255.255.255.0
 quit
 int vlan 20
 ip add 192.168.2.1 255.255.255.0
 quit
+int vlan 100
+ip add 192.168.3.1 255.255.255.0
+quit
 
 int g0/0/1
-port link-type trunk
-port trunk allow-pass vlan all
+port link-type access
+port default vlan 100
 quit
 int g0/0/2
-port link-type trunk 
-port trunk allow-pass vlan all
+port link-type access
+port default vlan 10
+quit
+int g0/0/3
+port link-type access
+port default vlan 20
+quit 
+
+ospf 1
+area 0
+network 192.168.1.0 255.255.255.0
+network 192.168.2.0 255.255.255.0
+network 192.168.3.0 255.255.255.0
+quit
+</code></pre><h4 id="R1"><a href="#R1" class="headerlink" title="R1"></a>R1</h4><pre><code>system
+int g0/0/1
+ip add 192.168.3.2 255.255.255.0
+quit 
+int g0/0/0
+ip add 2.2.2.1 255.255.255.0
+quit
+ospf 1
+area 0
+netwokr 192.168.3.0 255.255.255.0
+quit
+ip route-static 0.0.0.0 0.0.0.0 2.2.2.2
+ospf 1
+default-route-advertise always
 quit
 
-dhcp enable
-ip pool 10
-network 192.168.1.0 mask 255.255.255.0
-dns-list 202.196.32.1
-gateway-list 192.168.1.1
-lease day 10
-quit
+两个公网地址：
+100.100.100.15/24
+100.100.100.20/24
 
-dhcp enable
-ip pool 20
-network 192.168.2.0 mask 255.255.255.0
-dns-list 202.196.32.1
-gateway-list 192.168.2.1
-lease day 10
+int g0/0/0
+nat static global 100.100.100.15 inside 192.168.1.2
+nat static global 100.100.100.20 inside 192.168.2.2
+</code></pre><h4 id="R3"><a href="#R3" class="headerlink" title="R3"></a>R3</h4><pre><code>system
+int g0/0/0
+ip add 2.2.2.2 255.255.255.0
 quit
-
-int vlan 10
-dhcp select global
+int g0/0/1
+ip add 3.3.3.1 255.255.255.0
 quit
-int vlan 20
-dhcp select global
-</code></pre><h2 id="验证结果"><a href="#验证结果" class="headerlink" title="验证结果"></a>验证结果</h2><p>PC1的DHCP结果</p>
-<p><img src="https://i.imgur.com/z76eCz0.png" alt=""></p>
-<p>PC2的DHCP结果</p>
-<p><img src="https://i.imgur.com/SrkpS31.png" alt=""></p>
-<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><p>  在之前的不同见vlan通信的top基础上，把三层交换机作为DHCP服务器，配置在三层交换机上配置，配置完之后把PC换为DHCP就可以了。</p>
+ip route-static 100.100.100.15 255.255.255.0 2.2.2.1
+ip route-static 100.100.100.20 255.255.255.0 2.2.2.1
+</code></pre><h3 id="动态NAT"><a href="#动态NAT" class="headerlink" title="动态NAT"></a>动态NAT</h3><p>（S1和R1、R3基本配置就不再写出）</p>
+<h4 id="R1-1"><a href="#R1-1" class="headerlink" title="R1"></a>R1</h4><pre><code>公网地址：100.100.100.0/24
+nat address-group 1 100.100.100.1 100.100.100.254
+acl 2000
+rule permit source 192.168.0.0 0.0.255.255
+quit
+int g0/0/0
+nat outbound 2000 address-group 1 no-pat
+</code></pre><h4 id="R3-1"><a href="#R3-1" class="headerlink" title="R3"></a>R3</h4><pre><code>ip route-static 100.100.100.0 255.255.255.0 2.2.2.1
+</code></pre><h3 id="PAT-有一个公网地址"><a href="#PAT-有一个公网地址" class="headerlink" title="PAT(有一个公网地址)"></a>PAT(有一个公网地址)</h3><h4 id="R1-2"><a href="#R1-2" class="headerlink" title="R1"></a>R1</h4><pre><code>公网地址：100.100.100.30
+nat address-group 1 100.100.100.30 100.100.100.30
+acl 2000
+rule permit source 192.168.0.0 0.0.255.255
+quit
+int g0/0/0
+nat outbound 2000 address-group 1
+</code></pre><h4 id="R3-2"><a href="#R3-2" class="headerlink" title="R3"></a>R3</h4><pre><code>ip route-static 100.100.100.30 255.255.255.0 2.2.2.1
+</code></pre><h3 id="PAT-只有外网接口"><a href="#PAT-只有外网接口" class="headerlink" title="PAT(只有外网接口)"></a>PAT(只有外网接口)</h3><h4 id="R1-3"><a href="#R1-3" class="headerlink" title="R1"></a>R1</h4><pre><code>acl 2000
+rule permit source 192.168.0.0 0.0.255.255
+quit
+int g0/0/0
+nat outbound 2000
+</code></pre><h4 id="R3-3"><a href="#R3-3" class="headerlink" title="R3"></a>R3</h4><pre><code>ip route-static 2.2.2.0 255.255.255.0 2.2.2.1
+</code></pre><h3 id="静态端口映射"><a href="#静态端口映射" class="headerlink" title="静态端口映射"></a>静态端口映射</h3><p>在PAT的基础上输入如下命令：</p>
+<h4 id="R1-4"><a href="#R1-4" class="headerlink" title="R1"></a>R1</h4><pre><code>int g0/0/0 
+nat static protocol tcp global current-interface telnet inside 192.168.1.2
+telnet__(将当前接口的23端口映射到192.168.1.2的23端口，这里输出端口号或者协议都可以)
+</code></pre><p>完结~</p>
 
       
     </div>
@@ -463,8 +491,8 @@ dhcp select global
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/16/路由重分布/" rel="next" title="路由的重分布">
-                <i class="fa fa-chevron-left"></i> 路由的重分布
+              <a href="/2017/09/17/ACL/" rel="next" title="访问控制列表（ACL）">
+                <i class="fa fa-chevron-left"></i> 访问控制列表（ACL）
               </a>
             
           </div>
@@ -472,10 +500,6 @@ dhcp select global
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/16/vlan间通信/" rel="prev" title="三层交换机上的VLAN间的通信">
-                三层交换机上的VLAN间的通信 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -685,7 +709,7 @@ dhcp select global
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TOP图"><span class="nav-number">1.</span> <span class="nav-text">TOP图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详细配置"><span class="nav-number">2.</span> <span class="nav-text">详细配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VLAN10区域配置"><span class="nav-number">2.1.</span> <span class="nav-text">VLAN10区域配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#S2"><span class="nav-number">2.1.1.</span> <span class="nav-text">S2</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VLAN20区域配置"><span class="nav-number">2.2.</span> <span class="nav-text">VLAN20区域配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#S3"><span class="nav-number">2.2.1.</span> <span class="nav-text">S3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三层交换机的配置"><span class="nav-number">2.3.</span> <span class="nav-text">三层交换机的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#S1"><span class="nav-number">2.3.1.</span> <span class="nav-text">S1</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证结果"><span class="nav-number">3.</span> <span class="nav-text">验证结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点"><span class="nav-number">4.</span> <span class="nav-text">知识点</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TOP图"><span class="nav-number">1.</span> <span class="nav-text">TOP图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详细配置"><span class="nav-number">2.</span> <span class="nav-text">详细配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#静态NAT"><span class="nav-number">2.1.</span> <span class="nav-text">静态NAT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#S1"><span class="nav-number">2.1.1.</span> <span class="nav-text">S1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#R1"><span class="nav-number">2.1.2.</span> <span class="nav-text">R1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#R3"><span class="nav-number">2.1.3.</span> <span class="nav-text">R3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态NAT"><span class="nav-number">2.2.</span> <span class="nav-text">动态NAT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#R1-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">R1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#R3-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">R3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PAT-有一个公网地址"><span class="nav-number">2.3.</span> <span class="nav-text">PAT(有一个公网地址)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#R1-2"><span class="nav-number">2.3.1.</span> <span class="nav-text">R1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#R3-2"><span class="nav-number">2.3.2.</span> <span class="nav-text">R3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PAT-只有外网接口"><span class="nav-number">2.4.</span> <span class="nav-text">PAT(只有外网接口)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#R1-3"><span class="nav-number">2.4.1.</span> <span class="nav-text">R1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#R3-3"><span class="nav-number">2.4.2.</span> <span class="nav-text">R3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态端口映射"><span class="nav-number">2.5.</span> <span class="nav-text">静态端口映射</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#R1-4"><span class="nav-number">2.5.1.</span> <span class="nav-text">R1</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
