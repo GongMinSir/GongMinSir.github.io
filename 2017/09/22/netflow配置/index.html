@@ -96,20 +96,20 @@
 
 
 
-<meta name="description" content="一、netflow介绍&amp;emsp;&amp;emsp;NetFlow是一种数据交换方式，其工作原理是：NetFlow利用标准的交换模式处理数据流的第一个IP包数据，生成NetFlow 缓存，随后同样的数据基于缓存信息在同一个数据流中进行传输，不再匹配相关的访问控制等策略，NetFlow缓存同时包含了随后数据流的统计信息。">
+<meta name="description" content="netflow介绍&amp;emsp;&amp;emsp;NetFlow是一种数据交换方式，其工作原理是：NetFlow利用标准的交换模式处理数据流的第一个IP包数据，生成NetFlow 缓存，随后同样的数据基于缓存信息在同一个数据流中进行传输，不再匹配相关的访问控制等策略，NetFlow缓存同时包含了随后数据流的统计信息。">
 <meta name="keywords" content="Cisco">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Netflow配置">
 <meta property="og:url" content="http://yoursite.com/2017/09/22/netflow配置/index.html">
 <meta property="og:site_name" content="MyLife">
-<meta property="og:description" content="一、netflow介绍&amp;emsp;&amp;emsp;NetFlow是一种数据交换方式，其工作原理是：NetFlow利用标准的交换模式处理数据流的第一个IP包数据，生成NetFlow 缓存，随后同样的数据基于缓存信息在同一个数据流中进行传输，不再匹配相关的访问控制等策略，NetFlow缓存同时包含了随后数据流的统计信息。">
+<meta property="og:description" content="netflow介绍&amp;emsp;&amp;emsp;NetFlow是一种数据交换方式，其工作原理是：NetFlow利用标准的交换模式处理数据流的第一个IP包数据，生成NetFlow 缓存，随后同样的数据基于缓存信息在同一个数据流中进行传输，不再匹配相关的访问控制等策略，NetFlow缓存同时包含了随后数据流的统计信息。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/sy35hV6.png">
 <meta property="og:image" content="https://i.imgur.com/chlAgew.png">
-<meta property="og:updated_time" content="2017-09-23T06:28:20.356Z">
+<meta property="og:updated_time" content="2017-09-23T06:38:01.564Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Netflow配置">
-<meta name="twitter:description" content="一、netflow介绍&amp;emsp;&amp;emsp;NetFlow是一种数据交换方式，其工作原理是：NetFlow利用标准的交换模式处理数据流的第一个IP包数据，生成NetFlow 缓存，随后同样的数据基于缓存信息在同一个数据流中进行传输，不再匹配相关的访问控制等策略，NetFlow缓存同时包含了随后数据流的统计信息。">
+<meta name="twitter:description" content="netflow介绍&amp;emsp;&amp;emsp;NetFlow是一种数据交换方式，其工作原理是：NetFlow利用标准的交换模式处理数据流的第一个IP包数据，生成NetFlow 缓存，随后同样的数据基于缓存信息在同一个数据流中进行传输，不再匹配相关的访问控制等策略，NetFlow缓存同时包含了随后数据流的统计信息。">
 <meta name="twitter:image" content="https://i.imgur.com/sy35hV6.png">
 
 
@@ -367,15 +367,15 @@
       
 
       
-        <h2 id="一、netflow介绍"><a href="#一、netflow介绍" class="headerlink" title="一、netflow介绍"></a>一、netflow介绍</h2><p>&emsp;&emsp;NetFlow是一种数据交换方式，其工作原理是：NetFlow利用标准的交换模式处理数据流的第一个IP包数据，生成NetFlow 缓存，随后同样的数据基于缓存信息在同一个数据流中进行传输，不再匹配相关的访问控制等策略，NetFlow缓存同时包含了随后数据流的统计信息。<br><a id="more"></a></p>
+        <h2 id="netflow介绍"><a href="#netflow介绍" class="headerlink" title="netflow介绍"></a>netflow介绍</h2><p>&emsp;&emsp;NetFlow是一种数据交换方式，其工作原理是：NetFlow利用标准的交换模式处理数据流的第一个IP包数据，生成NetFlow 缓存，随后同样的数据基于缓存信息在同一个数据流中进行传输，不再匹配相关的访问控制等策略，NetFlow缓存同时包含了随后数据流的统计信息。<br><a id="more"></a></p>
 <p><the rest="" of="" contents="" |="" 余下全文=""><br><br>&emsp;&emsp;利用Netflow技术可以监测网络上的IP流（IP flow）信息。采集到的netflow流量信息可以帮助进行网络规划，网络管理，流量计费和病毒检测等等。</the></p>
-<h2 id="二、分析软件安装"><a href="#二、分析软件安装" class="headerlink" title="二、分析软件安装"></a>二、分析软件安装</h2><p>&emsp;&emsp;安装ManageEngine OpManager软件，本次我们所做的是在Windows系统下，也可以在linux系统下，安装的时候要记住所给的默认端口号，其他默认安装。<br></p>
+<h2 id="分析软件安装"><a href="#分析软件安装" class="headerlink" title="分析软件安装"></a>分析软件安装</h2><p>&emsp;&emsp;安装ManageEngine OpManager软件，本次我们所做的是在Windows系统下，也可以在linux系统下，安装的时候要记住所给的默认端口号，其他默认安装。<br></p>
 <h3 id="下载链接"><a href="#下载链接" class="headerlink" title="下载链接"></a>下载链接</h3><pre><code>http://www.manageengine.com/products/netflow/download.html#more_download
 </code></pre><h3 id="安装完成界面"><a href="#安装完成界面" class="headerlink" title="安装完成界面"></a>安装完成界面</h3><p>&emsp;&emsp;安装完成之后会自动打开web，需要等待软件初始化模块。<br></p>
 <h4 id="完成界面："><a href="#完成界面：" class="headerlink" title="完成界面："></a>完成界面：</h4><p><img src="https://i.imgur.com/sy35hV6.png" alt=""></p>
 <h4 id="登陆之后界面："><a href="#登陆之后界面：" class="headerlink" title="登陆之后界面："></a>登陆之后界面：</h4><p><img src="https://i.imgur.com/chlAgew.png" alt=""></p>
 <p>注意：<br><br>1.登录名和密码都是默认的admin，并且要点击保持登录。<br><br>2.软件有一个月的试用期，所以有足够的时间进行分析和设置以及检测,到期之后也可以再次安装。</p>
-<h2 id="三、配置"><a href="#三、配置" class="headerlink" title="三、配置"></a>三、配置</h2><p>&emsp;&emsp;Netflower必须在cisco上进行配置，要开启netflow功能，才能进行下一步的检测以及分析，本次以路由器cisco2801为例子。<br></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>&emsp;&emsp;Netflower必须在cisco上进行配置，要开启netflow功能，才能进行下一步的检测以及分析，本次以路由器cisco2801为例子。<br></p>
 <h3 id="思科路由器2801配置"><a href="#思科路由器2801配置" class="headerlink" title="思科路由器2801配置"></a>思科路由器2801配置</h3><h4 id="基础配置"><a href="#基础配置" class="headerlink" title="基础配置"></a>基础配置</h4><pre><code>enable
 configure terminal
 interface fastEthernet 0/0
@@ -391,14 +391,14 @@ version 2
 network 192.168.1.0
 network 192.168.2.0
 exit
-</code></pre><h4 id="netflow部分配置"><a href="#netflow部分配置" class="headerlink" title="netflow部分配置"></a>netflow部分配置</h4><h5 id="1、config全局状态下配置netflow版本号："><a href="#1、config全局状态下配置netflow版本号：" class="headerlink" title="1、config全局状态下配置netflow版本号："></a>1、config全局状态下配置netflow版本号：</h5><pre><code>router(config)#ip flow-export version 5  
+</code></pre><h4 id="netflow部分配置"><a href="#netflow部分配置" class="headerlink" title="netflow部分配置"></a>netflow部分配置</h4><h5 id="config全局状态下配置netflow版本号："><a href="#config全局状态下配置netflow版本号：" class="headerlink" title="config全局状态下配置netflow版本号："></a>config全局状态下配置netflow版本号：</h5><pre><code>router(config)#ip flow-export version 5  
 </code></pre><p>此命令将netflow配置为版本5。    </p>
-<h5 id="2、config全局状态下配置netflow服务器地址和端口号："><a href="#2、config全局状态下配置netflow服务器地址和端口号：" class="headerlink" title="2、config全局状态下配置netflow服务器地址和端口号："></a>2、config全局状态下配置netflow服务器地址和端口号：</h5><pre><code>router(config)#ip flow-export destination 192.168.1.10 9996  
+<h5 id="config全局状态下配置netflow服务器地址和端口号："><a href="#config全局状态下配置netflow服务器地址和端口号：" class="headerlink" title="config全局状态下配置netflow服务器地址和端口号："></a>config全局状态下配置netflow服务器地址和端口号：</h5><pre><code>router(config)#ip flow-export destination 192.168.1.10 9996  
 </code></pre><p>192.168.1.10为netflow服务器地址，即运行netflow版流量监视程序主机的IP地址，9996为服务端口号，即安装软件时的那个端口号。</p>
-<h5 id="3、在Cisco系列路由器交换机每个接口上（例如interface-fastethernet0-0；interface-fastethernet0-1等）分别进行配置："><a href="#3、在Cisco系列路由器交换机每个接口上（例如interface-fastethernet0-0；interface-fastethernet0-1等）分别进行配置：" class="headerlink" title="3、在Cisco系列路由器交换机每个接口上（例如interface fastethernet0/0；interface fastethernet0/1等）分别进行配置："></a>3、在Cisco系列路由器交换机每个接口上（例如interface fastethernet0/0；interface fastethernet0/1等）分别进行配置：</h5><pre><code>router(config-if)#ip route-cache flow  
-</code></pre><h5 id="4、Config全局状态下设置时区"><a href="#4、Config全局状态下设置时区" class="headerlink" title="4、Config全局状态下设置时区"></a>4、Config全局状态下设置时区</h5><pre><code>router(config)#clock timezone Beijing 8  
+<h5 id="在Cisco系列路由器交换机每个接口上（例如interface-fastethernet0-0；interface-fastethernet0-1等）分别进行配置："><a href="#在Cisco系列路由器交换机每个接口上（例如interface-fastethernet0-0；interface-fastethernet0-1等）分别进行配置：" class="headerlink" title="在Cisco系列路由器交换机每个接口上（例如interface fastethernet0/0；interface fastethernet0/1等）分别进行配置："></a>在Cisco系列路由器交换机每个接口上（例如interface fastethernet0/0；interface fastethernet0/1等）分别进行配置：</h5><pre><code>router(config-if)#ip route-cache flow  
+</code></pre><h5 id="Config全局状态下设置时区"><a href="#Config全局状态下设置时区" class="headerlink" title="Config全局状态下设置时区"></a>Config全局状态下设置时区</h5><pre><code>router(config)#clock timezone Beijing 8  
 </code></pre><p>此命令配置为北京时间，+8时区。  </p>
-<h5 id="5、enable状态下设置日期时间"><a href="#5、enable状态下设置日期时间" class="headerlink" title="5、enable状态下设置日期时间"></a>5、enable状态下设置日期时间</h5><pre><code>router#clock set 12：10：20  22 sep 2017  
+<h5 id="enable状态下设置日期时间"><a href="#enable状态下设置日期时间" class="headerlink" title="enable状态下设置日期时间"></a>enable状态下设置日期时间</h5><pre><code>router#clock set 12：10：20  22 sep 2017  
 </code></pre><p>此命令配置为2017年9月22日12时10分20秒。<br> </p>
 <h5 id="注意"><a href="#注意" class="headerlink" title="注意:"></a>注意:</h5><p>&emsp;&emsp;先配时区，后设置日期时间。同时接收netflow报文的计算机也要配置成相应的时区。有的Cisco机型断电后，需重新设置日期和时间。<br></p>
 <h5 id="查看命令"><a href="#查看命令" class="headerlink" title="查看命令"></a>查看命令</h5><pre><code>show ip flow export（显示当前Netflow的配置）
@@ -652,7 +652,7 @@ show ip cache flow（显示当前活动的流的概要，还显示设备输出�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、netflow介绍"><span class="nav-number">1.</span> <span class="nav-text">一、netflow介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、分析软件安装"><span class="nav-number">2.</span> <span class="nav-text">二、分析软件安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载链接"><span class="nav-number">2.1.</span> <span class="nav-text">下载链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装完成界面"><span class="nav-number">2.2.</span> <span class="nav-text">安装完成界面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#完成界面："><span class="nav-number">2.2.1.</span> <span class="nav-text">完成界面：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登陆之后界面："><span class="nav-number">2.2.2.</span> <span class="nav-text">登陆之后界面：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、配置"><span class="nav-number">3.</span> <span class="nav-text">三、配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思科路由器2801配置"><span class="nav-number">3.1.</span> <span class="nav-text">思科路由器2801配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基础配置"><span class="nav-number">3.1.1.</span> <span class="nav-text">基础配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#netflow部分配置"><span class="nav-number">3.1.2.</span> <span class="nav-text">netflow部分配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、config全局状态下配置netflow版本号："><span class="nav-number">3.1.2.1.</span> <span class="nav-text">1、config全局状态下配置netflow版本号：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、config全局状态下配置netflow服务器地址和端口号："><span class="nav-number">3.1.2.2.</span> <span class="nav-text">2、config全局状态下配置netflow服务器地址和端口号：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、在Cisco系列路由器交换机每个接口上（例如interface-fastethernet0-0；interface-fastethernet0-1等）分别进行配置："><span class="nav-number">3.1.2.3.</span> <span class="nav-text">3、在Cisco系列路由器交换机每个接口上（例如interface fastethernet0/0；interface fastethernet0/1等）分别进行配置：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、Config全局状态下设置时区"><span class="nav-number">3.1.2.4.</span> <span class="nav-text">4、Config全局状态下设置时区</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5、enable状态下设置日期时间"><span class="nav-number">3.1.2.5.</span> <span class="nav-text">5、enable状态下设置日期时间</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#注意"><span class="nav-number">3.1.2.6.</span> <span class="nav-text">注意:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看命令"><span class="nav-number">3.1.2.7.</span> <span class="nav-text">查看命令</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置实例检验"><span class="nav-number">3.1.3.</span> <span class="nav-text">配置实例检验</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#netflow介绍"><span class="nav-number">1.</span> <span class="nav-text">netflow介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析软件安装"><span class="nav-number">2.</span> <span class="nav-text">分析软件安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载链接"><span class="nav-number">2.1.</span> <span class="nav-text">下载链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装完成界面"><span class="nav-number">2.2.</span> <span class="nav-text">安装完成界面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#完成界面："><span class="nav-number">2.2.1.</span> <span class="nav-text">完成界面：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登陆之后界面："><span class="nav-number">2.2.2.</span> <span class="nav-text">登陆之后界面：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思科路由器2801配置"><span class="nav-number">3.1.</span> <span class="nav-text">思科路由器2801配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基础配置"><span class="nav-number">3.1.1.</span> <span class="nav-text">基础配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#netflow部分配置"><span class="nav-number">3.1.2.</span> <span class="nav-text">netflow部分配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#config全局状态下配置netflow版本号："><span class="nav-number">3.1.2.1.</span> <span class="nav-text">config全局状态下配置netflow版本号：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#config全局状态下配置netflow服务器地址和端口号："><span class="nav-number">3.1.2.2.</span> <span class="nav-text">config全局状态下配置netflow服务器地址和端口号：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在Cisco系列路由器交换机每个接口上（例如interface-fastethernet0-0；interface-fastethernet0-1等）分别进行配置："><span class="nav-number">3.1.2.3.</span> <span class="nav-text">在Cisco系列路由器交换机每个接口上（例如interface fastethernet0/0；interface fastethernet0/1等）分别进行配置：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Config全局状态下设置时区"><span class="nav-number">3.1.2.4.</span> <span class="nav-text">Config全局状态下设置时区</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#enable状态下设置日期时间"><span class="nav-number">3.1.2.5.</span> <span class="nav-text">enable状态下设置日期时间</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#注意"><span class="nav-number">3.1.2.6.</span> <span class="nav-text">注意:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看命令"><span class="nav-number">3.1.2.7.</span> <span class="nav-text">查看命令</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置实例检验"><span class="nav-number">3.1.3.</span> <span class="nav-text">配置实例检验</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
