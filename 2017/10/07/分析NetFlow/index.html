@@ -96,18 +96,24 @@
 
 
 
-<meta name="description" content="简介&amp;emsp;&amp;emsp;本次实验中，因为方便，所以选用了kali linux系统在虚拟机中进行操作，实验的思路是，用一个脚本，采用socket编程在本机的端口下进行监听，然后实时抓取数据包并解析。">
+<meta name="description" content="简介&amp;emsp;&amp;emsp;本次实验中，因为方便，所以选用了kali linux系统在虚拟机中进行操作，实验的思路是，用一个脚本，采用socket编程在本机的端口下进行监听，然后实时抓取数据包并解析，解析出来数据之后，把数据存到数据库中，最后利用Apache2服务器，采用PHP写一个网页，连接数据并把数据库的数据导出到网页上，以表格的形式显示出来。">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="脚本分析NetFlow">
 <meta property="og:url" content="http://yoursite.com/2017/10/07/分析NetFlow/index.html">
 <meta property="og:site_name" content="MyLife">
-<meta property="og:description" content="简介&amp;emsp;&amp;emsp;本次实验中，因为方便，所以选用了kali linux系统在虚拟机中进行操作，实验的思路是，用一个脚本，采用socket编程在本机的端口下进行监听，然后实时抓取数据包并解析。">
+<meta property="og:description" content="简介&amp;emsp;&amp;emsp;本次实验中，因为方便，所以选用了kali linux系统在虚拟机中进行操作，实验的思路是，用一个脚本，采用socket编程在本机的端口下进行监听，然后实时抓取数据包并解析，解析出来数据之后，把数据存到数据库中，最后利用Apache2服务器，采用PHP写一个网页，连接数据并把数据库的数据导出到网页上，以表格的形式显示出来。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-07T08:16:14.000Z">
+<meta property="og:image" content="https://i.imgur.com/LcIxkI2.jpg">
+<meta property="og:image" content="https://i.imgur.com/gtMmMKf.jpg">
+<meta property="og:image" content="https://i.imgur.com/U2v7Qa0.jpg">
+<meta property="og:image" content="https://i.imgur.com/77Cl7Zm.jpg">
+<meta property="og:image" content="https://i.imgur.com/m6YxZVJ.jpg">
+<meta property="og:updated_time" content="2017-10-07T08:41:54.359Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="脚本分析NetFlow">
-<meta name="twitter:description" content="简介&amp;emsp;&amp;emsp;本次实验中，因为方便，所以选用了kali linux系统在虚拟机中进行操作，实验的思路是，用一个脚本，采用socket编程在本机的端口下进行监听，然后实时抓取数据包并解析。">
+<meta name="twitter:description" content="简介&amp;emsp;&amp;emsp;本次实验中，因为方便，所以选用了kali linux系统在虚拟机中进行操作，实验的思路是，用一个脚本，采用socket编程在本机的端口下进行监听，然后实时抓取数据包并解析，解析出来数据之后，把数据存到数据库中，最后利用Apache2服务器，采用PHP写一个网页，连接数据并把数据库的数据导出到网页上，以表格的形式显示出来。">
+<meta name="twitter:image" content="https://i.imgur.com/LcIxkI2.jpg">
 
 
 
@@ -364,13 +370,13 @@
       
 
       
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>&emsp;&emsp;本次实验中，因为方便，所以选用了kali linux系统在虚拟机中进行操作，实验的思路是，用一个脚本，采用socket编程在本机的端口下进行监听，然后实时抓取数据包并解析。<br><a id="more"></a></p>
-<p><the rest="" of="" contents="" |="" 余下全文=""><br><br>&emsp;&emsp;解析出来数据之后，把数据存到数据库中，最后利用Apache2服务器，采用PHP写一个网页，连接数据并把数据库的数据导出到网页上，以表格的形式显示出来。</the></p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="抓包解包"><a href="#抓包解包" class="headerlink" title="抓包解包"></a>抓包解包</h3><h4 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h4><p>&emsp;&emsp;由于前面已经进行了netflow的配置，目的IP为192.168.1.10，目的端口为：9996，所以，先给虚拟机桥接之后，配置一个静态的IP地址为上面的地址，如下图所示：</p>
-<p>&emsp;&emsp;然后检测一下python是否存在，打开终端，输入python如下所示则证明正常：</p>
-<h4 id="脚本文件创建并打开"><a href="#脚本文件创建并打开" class="headerlink" title="脚本文件创建并打开"></a>脚本文件创建并打开</h4><pre><code>touch netflow.py
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>&emsp;&emsp;本次实验中，因为方便，所以选用了kali linux系统在虚拟机中进行操作，实验的思路是，用一个脚本，采用socket编程在本机的端口下进行监听，然后实时抓取数据包并解析，解析出来数据之后，把数据存到数据库中，最后利用Apache2服务器，采用PHP写一个网页，连接数据并把数据库的数据导出到网页上，以表格的形式显示出来。<br><a id="more"></a></p>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<h2 id="抓包解包"><a href="#抓包解包" class="headerlink" title="抓包解包"></a>抓包解包</h2><h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>&emsp;&emsp;由于前面已经进行了netflow的配置，目的IP为192.168.1.10，目的端口为：9996，所以，先给虚拟机桥接之后，配置一个静态的IP地址为上面的地址，如下图所示：<br><img src="https://i.imgur.com/LcIxkI2.jpg" alt=""><br>&emsp;&emsp;然后检测一下python是否存在，打开终端，输入python如下所示则证明正常：<br><img src="https://i.imgur.com/gtMmMKf.jpg" alt=""></p>
+<h3 id="脚本文件创建并打开"><a href="#脚本文件创建并打开" class="headerlink" title="脚本文件创建并打开"></a>脚本文件创建并打开</h3><pre><code>touch netflow.py
 gedit netflow.py
-</code></pre><h4 id="抓包解包代码"><a href="#抓包解包代码" class="headerlink" title="抓包解包代码"></a>抓包解包代码</h4><pre><code>import socket, struct
+</code></pre><h3 id="抓包解包代码"><a href="#抓包解包代码" class="headerlink" title="抓包解包代码"></a>抓包解包代码</h3><pre><code>import socket, struct
 from socket import inet_ntoa
 
 SIZE_OF_HEADER = 24
@@ -407,13 +413,13 @@ while True:
            nfdata[&apos;protocol&apos;] = ord(buf[base+38])
        except:
            continue
-</code></pre><h3 id="导入数据到数据库"><a href="#导入数据到数据库" class="headerlink" title="导入数据到数据库"></a>导入数据到数据库</h3><h4 id="开启数据库服务"><a href="#开启数据库服务" class="headerlink" title="开启数据库服务"></a>开启数据库服务</h4><pre><code>service mysql start
-</code></pre><h4 id="进入数据库"><a href="#进入数据库" class="headerlink" title="进入数据库"></a>进入数据库</h4><pre><code>mysql
-</code></pre><p>如图：</p>
-<h4 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h4><pre><code>create database mysql
-</code></pre><h4 id="创建普通用户并授权"><a href="#创建普通用户并授权" class="headerlink" title="创建普通用户并授权"></a>创建普通用户并授权</h4><pre><code>create user &apos;dbas&apos;@&apos;127.0.0.1&apos; identified by &apos;123456&apos;;
+</code></pre><h2 id="导入数据到数据库"><a href="#导入数据到数据库" class="headerlink" title="导入数据到数据库"></a>导入数据到数据库</h2><h3 id="开启数据库服务"><a href="#开启数据库服务" class="headerlink" title="开启数据库服务"></a>开启数据库服务</h3><pre><code>service mysql start
+</code></pre><h3 id="进入数据库"><a href="#进入数据库" class="headerlink" title="进入数据库"></a>进入数据库</h3><pre><code>mysql
+</code></pre><p>如图：<br><img src="https://i.imgur.com/U2v7Qa0.jpg" alt=""></p>
+<h3 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h3><pre><code>create database mysql
+</code></pre><h3 id="创建普通用户并授权"><a href="#创建普通用户并授权" class="headerlink" title="创建普通用户并授权"></a>创建普通用户并授权</h3><pre><code>create user &apos;dbas&apos;@&apos;127.0.0.1&apos; identified by &apos;123456&apos;;
 grant select,insert,update,delete on mysql.* to dbas@&apos;127.0.0.1&apos;;
-</code></pre><h4 id="连接数据库并传输数据代码"><a href="#连接数据库并传输数据代码" class="headerlink" title="连接数据库并传输数据代码"></a>连接数据库并传输数据代码</h4><pre><code> import MySQLdb
+</code></pre><h3 id="连接数据库并传输数据代码"><a href="#连接数据库并传输数据代码" class="headerlink" title="连接数据库并传输数据代码"></a>连接数据库并传输数据代码</h3><pre><code> import MySQLdb
  conn=MySQLdb.connect(&apos;127.0.0.1&apos;,user=&apos;dbas&apos;,passwd=&apos;123456&apos;,db=&apos;mysql&apos;,charset=&apos;utf8&apos;)
  cursor=conn.cursor()
 
@@ -446,7 +452,7 @@ grant select,insert,update,delete on mysql.* to dbas@&apos;127.0.0.1&apos;;
     conn.commit()
 cursor.close()
 conn.close()
-</code></pre><h3 id="整个抓包脚本代码"><a href="#整个抓包脚本代码" class="headerlink" title="整个抓包脚本代码"></a>整个抓包脚本代码</h3><pre><code> #!/usr/bin/python
+</code></pre><h2 id="整个抓包脚本代码"><a href="#整个抓包脚本代码" class="headerlink" title="整个抓包脚本代码"></a>整个抓包脚本代码</h2><pre><code> #!/usr/bin/python
  # -*- coding: UTF-8 -*-
  import MySQLdb
  import socket, struct
@@ -514,16 +520,16 @@ conn.close()
     conn.commit()
 cursor.close()
 conn.close()
-</code></pre><h4 id="查看数据是否导入"><a href="#查看数据是否导入" class="headerlink" title="查看数据是否导入"></a>查看数据是否导入</h4><pre><code>service mysql start
+</code></pre><h3 id="查看数据是否导入"><a href="#查看数据是否导入" class="headerlink" title="查看数据是否导入"></a>查看数据是否导入</h3><pre><code>service mysql start
 mysql
 use mysql；
 select * from netflow；
-</code></pre><p>如下所示：</p>
-<h3 id="导出数据到网页"><a href="#导出数据到网页" class="headerlink" title="导出数据到网页"></a>导出数据到网页</h3><h4 id="开启Apache2服务"><a href="#开启Apache2服务" class="headerlink" title="开启Apache2服务"></a>开启Apache2服务</h4><pre><code>service apache2 start
-</code></pre><h4 id="查看php环境"><a href="#查看php环境" class="headerlink" title="查看php环境"></a>查看php环境</h4><pre><code>php -v
-</code></pre><h4 id="创建文件进行编译"><a href="#创建文件进行编译" class="headerlink" title="创建文件进行编译"></a>创建文件进行编译</h4><pre><code>touch /var/www/html/show.php
+</code></pre><p>如下所示：<br><img src="https://i.imgur.com/77Cl7Zm.jpg" alt=""></p>
+<h2 id="导出数据到网页"><a href="#导出数据到网页" class="headerlink" title="导出数据到网页"></a>导出数据到网页</h2><h3 id="开启Apache2服务"><a href="#开启Apache2服务" class="headerlink" title="开启Apache2服务"></a>开启Apache2服务</h3><pre><code>service apache2 start
+</code></pre><h3 id="查看php环境"><a href="#查看php环境" class="headerlink" title="查看php环境"></a>查看php环境</h3><pre><code>php -v
+</code></pre><h3 id="创建文件进行编译"><a href="#创建文件进行编译" class="headerlink" title="创建文件进行编译"></a>创建文件进行编译</h3><pre><code>touch /var/www/html/show.php
 gedit /var/www/html/show.php
-</code></pre><h4 id="导出数据代码"><a href="#导出数据代码" class="headerlink" title="导出数据代码"></a>导出数据代码</h4><pre><code>&lt;html&gt;
+</code></pre><h3 id="导出数据代码"><a href="#导出数据代码" class="headerlink" title="导出数据代码"></a>导出数据代码</h3><pre><code>&lt;html&gt;
 &lt;head&gt;
 &lt;title&gt;netflow data&lt;/title&gt;
 &lt;/head&gt;
@@ -560,7 +566,8 @@ echo&quot;&lt;/table&gt;&quot;;
 &lt;/center&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><h4 id="导出结果显示"><a href="#导出结果显示" class="headerlink" title="导出结果显示"></a>导出结果显示</h4>
+</code></pre><h3 id="导出结果显示"><a href="#导出结果显示" class="headerlink" title="导出结果显示"></a>导出结果显示</h3><p><img src="https://i.imgur.com/m6YxZVJ.jpg" alt=""></p>
+</the>
       
     </div>
     
@@ -808,7 +815,7 @@ echo&quot;&lt;/table&gt;&quot;;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#抓包解包"><span class="nav-number">2.1.</span> <span class="nav-text">抓包解包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#环境配置"><span class="nav-number">2.1.1.</span> <span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#脚本文件创建并打开"><span class="nav-number">2.1.2.</span> <span class="nav-text">脚本文件创建并打开</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#抓包解包代码"><span class="nav-number">2.1.3.</span> <span class="nav-text">抓包解包代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入数据到数据库"><span class="nav-number">2.2.</span> <span class="nav-text">导入数据到数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开启数据库服务"><span class="nav-number">2.2.1.</span> <span class="nav-text">开启数据库服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进入数据库"><span class="nav-number">2.2.2.</span> <span class="nav-text">进入数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建数据库"><span class="nav-number">2.2.3.</span> <span class="nav-text">创建数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建普通用户并授权"><span class="nav-number">2.2.4.</span> <span class="nav-text">创建普通用户并授权</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#连接数据库并传输数据代码"><span class="nav-number">2.2.5.</span> <span class="nav-text">连接数据库并传输数据代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#整个抓包脚本代码"><span class="nav-number">2.3.</span> <span class="nav-text">整个抓包脚本代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查看数据是否导入"><span class="nav-number">2.3.1.</span> <span class="nav-text">查看数据是否导入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导出数据到网页"><span class="nav-number">2.4.</span> <span class="nav-text">导出数据到网页</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开启Apache2服务"><span class="nav-number">2.4.1.</span> <span class="nav-text">开启Apache2服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看php环境"><span class="nav-number">2.4.2.</span> <span class="nav-text">查看php环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建文件进行编译"><span class="nav-number">2.4.3.</span> <span class="nav-text">创建文件进行编译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导出数据代码"><span class="nav-number">2.4.4.</span> <span class="nav-text">导出数据代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导出结果显示"><span class="nav-number">2.4.5.</span> <span class="nav-text">导出结果显示</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#抓包解包"><span class="nav-number">2.</span> <span class="nav-text">抓包解包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境配置"><span class="nav-number">2.1.</span> <span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#脚本文件创建并打开"><span class="nav-number">2.2.</span> <span class="nav-text">脚本文件创建并打开</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抓包解包代码"><span class="nav-number">2.3.</span> <span class="nav-text">抓包解包代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入数据到数据库"><span class="nav-number">3.</span> <span class="nav-text">导入数据到数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开启数据库服务"><span class="nav-number">3.1.</span> <span class="nav-text">开启数据库服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进入数据库"><span class="nav-number">3.2.</span> <span class="nav-text">进入数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数据库"><span class="nav-number">3.3.</span> <span class="nav-text">创建数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建普通用户并授权"><span class="nav-number">3.4.</span> <span class="nav-text">创建普通用户并授权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接数据库并传输数据代码"><span class="nav-number">3.5.</span> <span class="nav-text">连接数据库并传输数据代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整个抓包脚本代码"><span class="nav-number">4.</span> <span class="nav-text">整个抓包脚本代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看数据是否导入"><span class="nav-number">4.1.</span> <span class="nav-text">查看数据是否导入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导出数据到网页"><span class="nav-number">5.</span> <span class="nav-text">导出数据到网页</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开启Apache2服务"><span class="nav-number">5.1.</span> <span class="nav-text">开启Apache2服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看php环境"><span class="nav-number">5.2.</span> <span class="nav-text">查看php环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建文件进行编译"><span class="nav-number">5.3.</span> <span class="nav-text">创建文件进行编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导出数据代码"><span class="nav-number">5.4.</span> <span class="nav-text">导出数据代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导出结果显示"><span class="nav-number">5.5.</span> <span class="nav-text">导出结果显示</span></a></li></ol></li></ol></div>
             
 
           </div>
