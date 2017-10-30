@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Cisco," />
+  <meta name="keywords" content="HUAWEI," />
 
 
 
@@ -96,21 +96,26 @@
 
 
 
-<meta name="description" content="netflow介绍&amp;emsp;&amp;emsp;NetFlow是一种数据交换方式，其工作原理是：NetFlow利用标准的交换模式处理数据流的第一个IP包数据，生成NetFlow 缓存，随后同样的数据基于缓存信息在同一个数据流中进行传输，不再匹配相关的访问控制等策略，NetFlow缓存同时包含了随后数据流的统计信息。">
-<meta name="keywords" content="Cisco">
+<meta name="description" content="TOP图">
+<meta name="keywords" content="HUAWEI">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Netflow配置">
-<meta property="og:url" content="http://yoursite.com/2017/09/22/netflow配置/index.html">
+<meta property="og:title" content="华为防火墙基础配置之用户上网NAT和服务器负载均衡">
+<meta property="og:url" content="http://yoursite.com/2017/10/30/防火墙基础配置1——用户上网NAT和服务器负载均衡/index.html">
 <meta property="og:site_name" content="MyLife">
-<meta property="og:description" content="netflow介绍&amp;emsp;&amp;emsp;NetFlow是一种数据交换方式，其工作原理是：NetFlow利用标准的交换模式处理数据流的第一个IP包数据，生成NetFlow 缓存，随后同样的数据基于缓存信息在同一个数据流中进行传输，不再匹配相关的访问控制等策略，NetFlow缓存同时包含了随后数据流的统计信息。">
+<meta property="og:description" content="TOP图">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/sy35hV6.png">
-<meta property="og:image" content="https://i.imgur.com/chlAgew.png">
-<meta property="og:updated_time" content="2017-10-20T07:56:14.039Z">
+<meta property="og:image" content="https://i.imgur.com/Pkh57x6.png">
+<meta property="og:image" content="https://i.imgur.com/FcIPQny.png">
+<meta property="og:image" content="https://i.imgur.com/OCzIe5b.png">
+<meta property="og:image" content="https://i.imgur.com/6mm44jz.png">
+<meta property="og:image" content="https://i.imgur.com/5l6QadE.png">
+<meta property="og:image" content="https://i.imgur.com/SDOlra8.png">
+<meta property="og:image" content="https://i.imgur.com/ZwxXLOW.png">
+<meta property="og:updated_time" content="2017-10-30T11:19:40.533Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Netflow配置">
-<meta name="twitter:description" content="netflow介绍&amp;emsp;&amp;emsp;NetFlow是一种数据交换方式，其工作原理是：NetFlow利用标准的交换模式处理数据流的第一个IP包数据，生成NetFlow 缓存，随后同样的数据基于缓存信息在同一个数据流中进行传输，不再匹配相关的访问控制等策略，NetFlow缓存同时包含了随后数据流的统计信息。">
-<meta name="twitter:image" content="https://i.imgur.com/sy35hV6.png">
+<meta name="twitter:title" content="华为防火墙基础配置之用户上网NAT和服务器负载均衡">
+<meta name="twitter:description" content="TOP图">
+<meta name="twitter:image" content="https://i.imgur.com/Pkh57x6.png">
 
 
 
@@ -139,13 +144,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/09/22/netflow配置/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/30/防火墙基础配置1——用户上网NAT和服务器负载均衡/"/>
 
 
 
 
 
-  <title>Netflow配置 | MyLife</title>
+  <title>华为防火墙基础配置之用户上网NAT和服务器负载均衡 | MyLife</title>
   
 
 
@@ -278,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/22/netflow配置/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/30/防火墙基础配置1——用户上网NAT和服务器负载均衡/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gong Min">
@@ -295,7 +300,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Netflow配置</h1>
+          <h1 class="post-title" itemprop="name headline">华为防火墙基础配置之用户上网NAT和服务器负载均衡</h1>
         
 
         <div class="post-meta">
@@ -307,8 +312,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-22T11:23:10+08:00">
-                2017-09-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-30T18:23:10+08:00">
+                2017-10-30
               </time>
             
 
@@ -367,43 +372,77 @@
       
 
       
-        <h2 id="netflow介绍"><a href="#netflow介绍" class="headerlink" title="netflow介绍"></a>netflow介绍</h2><p>&emsp;&emsp;NetFlow是一种数据交换方式，其工作原理是：NetFlow利用标准的交换模式处理数据流的第一个IP包数据，生成NetFlow 缓存，随后同样的数据基于缓存信息在同一个数据流中进行传输，不再匹配相关的访问控制等策略，NetFlow缓存同时包含了随后数据流的统计信息。<br><a id="more"></a></p>
-<p><the rest="" of="" contents="" |="" 余下全文=""><br><br>&emsp;&emsp;利用Netflow技术可以监测网络上的IP流（IP flow）信息。采集到的netflow流量信息可以帮助进行网络规划，网络管理，流量计费和病毒检测等等。</the></p>
-<h2 id="分析软件安装"><a href="#分析软件安装" class="headerlink" title="分析软件安装"></a>分析软件安装</h2><p>&emsp;&emsp;安装ManageEngine OpManager软件，本次我们所做的是在Windows系统下，也可以在linux系统下，安装的时候要记住所给的默认端口号，其他默认安装。<br></p>
-<h3 id="下载链接"><a href="#下载链接" class="headerlink" title="下载链接"></a>下载链接</h3><pre><code>http://www.manageengine.com/products/netflow/download.html#more_download
-</code></pre><h3 id="安装完成界面"><a href="#安装完成界面" class="headerlink" title="安装完成界面"></a>安装完成界面</h3><p>&emsp;&emsp;安装完成之后会自动打开web，需要等待软件初始化模块。<br></p>
-<h4 id="完成界面："><a href="#完成界面：" class="headerlink" title="完成界面："></a>完成界面：</h4><p><img src="https://i.imgur.com/sy35hV6.png" alt=""></p>
-<h4 id="登陆之后界面："><a href="#登陆之后界面：" class="headerlink" title="登陆之后界面："></a>登陆之后界面：</h4><p><img src="https://i.imgur.com/chlAgew.png" alt=""></p>
-<p>注意：<br><br>1.登录名和密码都是默认的admin，并且要点击保持登录。<br><br>2.软件有一个月的试用期，所以有足够的时间进行分析和设置以及检测,到期之后也可以再次安装。</p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>&emsp;&emsp;Netflower必须在cisco上进行配置，要开启netflow功能，才能进行下一步的检测以及分析，本次以路由器cisco2801为例子。<br></p>
-<h3 id="思科路由器2801配置"><a href="#思科路由器2801配置" class="headerlink" title="思科路由器2801配置"></a>思科路由器2801配置</h3><h4 id="基础配置"><a href="#基础配置" class="headerlink" title="基础配置"></a>基础配置</h4><pre><code>enable
-configure terminal
-interface fastEthernet 0/0
-ip address 192.168.1.9 255.255.255.0
-no shutdown
-exit
-interface fastEthernet 0/1
-ip address 192.168.2.9 255.255.255.0
-no shutdown
-exit
-router rip
-version 2
-network 192.168.1.0
-network 192.168.2.0
-exit
-</code></pre><h4 id="netflow部分配置"><a href="#netflow部分配置" class="headerlink" title="netflow部分配置"></a>netflow部分配置</h4><h5 id="config全局状态下配置netflow版本号："><a href="#config全局状态下配置netflow版本号：" class="headerlink" title="config全局状态下配置netflow版本号："></a>config全局状态下配置netflow版本号：</h5><pre><code>router(config)#ip flow-export version 5  
-</code></pre><p>此命令将netflow配置为版本5。    </p>
-<h5 id="config全局状态下配置netflow服务器地址和端口号："><a href="#config全局状态下配置netflow服务器地址和端口号：" class="headerlink" title="config全局状态下配置netflow服务器地址和端口号："></a>config全局状态下配置netflow服务器地址和端口号：</h5><pre><code>router(config)#ip flow-export destination 192.168.1.10 9996  
-</code></pre><p>192.168.1.10为netflow服务器地址，即运行netflow版流量监视程序主机的IP地址，9996为服务端口号，即安装软件时的那个端口号。</p>
-<h5 id="在Cisco系列路由器交换机每个接口上（例如interface-fastethernet0-0；interface-fastethernet0-1等）分别进行配置："><a href="#在Cisco系列路由器交换机每个接口上（例如interface-fastethernet0-0；interface-fastethernet0-1等）分别进行配置：" class="headerlink" title="在Cisco系列路由器交换机每个接口上（例如interface fastethernet0/0；interface fastethernet0/1等）分别进行配置："></a>在Cisco系列路由器交换机每个接口上（例如interface fastethernet0/0；interface fastethernet0/1等）分别进行配置：</h5><pre><code>router(config-if)#ip route-cache flow  
-</code></pre><h5 id="Config全局状态下设置时区"><a href="#Config全局状态下设置时区" class="headerlink" title="Config全局状态下设置时区"></a>Config全局状态下设置时区</h5><pre><code>router(config)#clock timezone Beijing 8  
-</code></pre><p>此命令配置为北京时间，+8时区。  </p>
-<h5 id="enable状态下设置日期时间"><a href="#enable状态下设置日期时间" class="headerlink" title="enable状态下设置日期时间"></a>enable状态下设置日期时间</h5><pre><code>router#clock set 12：10：20  22 sep 2017  
-</code></pre><p>此命令配置为2017年9月22日12时10分20秒。<br> </p>
-<h5 id="注意"><a href="#注意" class="headerlink" title="注意:"></a>注意:</h5><p>&emsp;&emsp;先配时区，后设置日期时间。同时接收netflow报文的计算机也要配置成相应的时区。有的Cisco机型断电后，需重新设置日期和时间。<br></p>
-<h5 id="查看命令"><a href="#查看命令" class="headerlink" title="查看命令"></a>查看命令</h5><pre><code>show ip flow export（显示当前Netflow的配置）
-show ip cache flow（显示当前活动的流的概要，还显示设备输出了多少Netflow数据）
-</code></pre>
+        <h2 id="TOP图"><a href="#TOP图" class="headerlink" title="TOP图"></a>TOP图</h2><p><img src="https://i.imgur.com/Pkh57x6.png" alt=""><br><a id="more"></a></p>
+<p><the rest="" of="" contents="" |="" 余下全文=""></the></p>
+<h2 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h2><p>①掌握基础安全区域的配置。<br>②掌握基础域间策略的配置。<br>③掌握nat easy-ip的配置。<br>④掌握nat server的配置。<br>⑤掌握服务器负载均衡。</p>
+<h2 id="实验需求"><a href="#实验需求" class="headerlink" title="实验需求"></a>实验需求</h2><p>①配置trust区域用户可以上网，client3拒绝ping，所有trust区域主机拒绝telnet外网。<br>②192.168.200.200主机nat到外网，可以使用公网IP 211.1.1.100访问。<br>③主机192.168.200.201 202 203提供负载均衡服务，虚拟服务地址211.1.1.200。</p>
+<h2 id="实验配置"><a href="#实验配置" class="headerlink" title="实验配置"></a>实验配置</h2><pre><code>&lt;SRG&gt;sys
+[SRG]stp region-configuration
+[SRG-mst-region]region-name e054e31560b5
+[SRG-mst-region]active region-configuration
+[SRG]interface GigabitEthernet0/0/0
+[SRG-GigabitEthernet0/0/0]alias GE0/MGMT
+[SRG-GigabitEthernet0/0/0] ip address 192.168.100.1 255.255.255.0
+Info: The DHCP server configuration on this interface will be deleted.
+[SRG-GigabitEthernet0/0/0]dhcp select interface
+[SRG-GigabitEthernet0/0/0]dhcp server gateway-list 192.168.100.1
+[SRG-GigabitEthernet0/0/0]dhcp server dns-list 8.8.8.8
+[SRG]interface GigabitEthernet0/0/1
+[SRG-GigabitEthernet0/0/1]ip address 192.168.200.1 255.255.255.0
+[SRG]interface GigabitEthernet0/0/2
+[SRG-GigabitEthernet0/0/2]ip address 211.1.1.1 255.255.255.0
+[SRG]firewall zone untrust
+[SRG-zone-untrust]add interface GigabitEthernet0/0/2
+[SRG-zone-untrust]firewall zone dmz
+[SRG-zone-dmz]add interface GigabitEthernet0/0/1
+[SRG-zone-dmz]firewall zone name usr1
+[SRG-zone-usr1]set priority 86
+[SRG-zone-usr1]add interface GigabitEthernet0/0/8
+[SRG]slb
+[SRG-slb]rserver 1 rip 192.168.200.201 weight 32 healthchk
+[SRG-slb]rserver 2 rip 192.168.200.202 weight 32 healthchk
+[SRG-slb]rserver 3 rip 192.168.200.203 weight 32 healthchk
+[SRG-slb]group g1
+[SRG-slb-group-g1]metric roundrobin
+[SRG-slb-group-g1]addrserver 1
+[SRG-slb-group-g1]addrserver 2
+[SRG-slb-group-g1]addrserver 3
+[SRG-slb-group-g1]vserver ser1 vip 211.1.1.200 group g1
+[SRG]firewall packet-filter default permit interzone local untrust direction inbound
+[SRG]firewall packet-filter default permit interzone local dmz direction inbound
+[SRG]firewall packet-filter default permit interzone dmz untrust direction outbound
+[SRG]nat address-group 0 mypool 211.1.1.10 211.1.1.20
+[SRG]nat server 0 global 211.1.1.100 inside 192.168.200.200
+[SRG]slb enable
+[SRG]policy interzone trust untrust outbound
+[SRG-policy-interzone-trust-untrust-outbound]policy 1
+[SRG-policy-interzone-trust-untrust-outbound-1]action deny
+[SRG-policy-interzone-trust-untrust-outbound-1]policy service service-set icmp
+[SRG-policy-interzone-trust-untrust-outbound-1]policy source 192.168.100.100 0
+[SRG-policy-interzone-trust-untrust-outbound-1]policy 5
+[SRG-policy-interzone-trust-untrust-outbound-5]action deny
+[SRG-policy-interzone-trust-untrust-outbound-5]policy service service-set telnet
+[SRG-policy-interzone-trust-untrust-outbound-5]policy source 192.168.100.0 mask 24
+[SRG-policy-interzone-trust-untrust-outbound-5]policy 10
+[SRG-policy-interzone-trust-untrust-outbound-10]action permit
+[SRG-policy-interzone-trust-untrust-outbound-10]policy source 192.168.100.0 mask 24
+[SRG]policy interzone dmz untrust inbound
+[SRG-policy-interzone-dmz-untrust-inbound]policy 10
+[SRG-policy-interzone-dmz-untrust-inbound-10]action permit
+[SRG-policy-interzone-dmz-untrust-inbound-10]policy destination 192.168.200.200 0
+[SRG-policy-interzone-dmz-untrust-inbound-10]policy destination 192.168.200.0 mask 24
+[SRG]nat-policy interzone trust untrust outbound
+[SRG-nat-policy-interzone-trust-untrust-outbound] policy 10
+[SRG-nat-policy-interzone-trust-untrust-outbound-10]action source-nat
+[SRG-nat-policy-interzone-trust-untrust-outbound-10]policy source 192.168.100.0 mask 24
+[SRG-nat-policy-interzone-trust-untrust-outbound-10]easy-ip GigabitEthernet0/0/2
+</code></pre><h2 id="实验验证"><a href="#实验验证" class="headerlink" title="实验验证"></a>实验验证</h2><p>主机4ping公网：<br><img src="https://i.imgur.com/FcIPQny.png" alt=""></p>
+<p>主机3ping公网：<br><img src="https://i.imgur.com/OCzIe5b.png" alt=""></p>
+<p>公网ping NAT服务器192.168.100.200：<br><img src="https://i.imgur.com/6mm44jz.png" alt=""></p>
+<p>此时防火墙会话列表：<br><img src="https://i.imgur.com/5l6QadE.png" alt=""></p>
+<p>公网ping负载均衡服务器公网地址：<br><img src="https://i.imgur.com/SDOlra8.png" alt=""></p>
+<p>此时防火墙会话列表：<br><img src="https://i.imgur.com/ZwxXLOW.png" alt=""></p>
+
       
     </div>
     
@@ -420,7 +459,7 @@ show ip cache flow（显示当前活动的流的概要，还显示设备输出�
       
         <div class="post-tags">
           
-            <a href="/tags/Cisco/" rel="tag"><i class="fa fa-tag"></i> Cisco</a>
+            <a href="/tags/HUAWEI/" rel="tag"><i class="fa fa-tag"></i> HUAWEI</a>
           
         </div>
       
@@ -433,8 +472,8 @@ show ip cache flow（显示当前活动的流的概要，还显示设备输出�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/19/NAT/" rel="next" title="网络地址转换">
-                <i class="fa fa-chevron-left"></i> 网络地址转换
+              <a href="/2017/10/20/igraph画图/" rel="next" title="igraph分析网络">
+                <i class="fa fa-chevron-left"></i> igraph分析网络
               </a>
             
           </div>
@@ -442,10 +481,6 @@ show ip cache flow（显示当前活动的流的概要，还显示设备输出�
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/07/分析NetFlow/" rel="prev" title="脚本分析NetFlow">
-                脚本分析NetFlow <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -655,7 +690,7 @@ show ip cache flow（显示当前活动的流的概要，还显示设备输出�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#netflow介绍"><span class="nav-number">1.</span> <span class="nav-text">netflow介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析软件安装"><span class="nav-number">2.</span> <span class="nav-text">分析软件安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载链接"><span class="nav-number">2.1.</span> <span class="nav-text">下载链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装完成界面"><span class="nav-number">2.2.</span> <span class="nav-text">安装完成界面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#完成界面："><span class="nav-number">2.2.1.</span> <span class="nav-text">完成界面：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登陆之后界面："><span class="nav-number">2.2.2.</span> <span class="nav-text">登陆之后界面：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思科路由器2801配置"><span class="nav-number">3.1.</span> <span class="nav-text">思科路由器2801配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基础配置"><span class="nav-number">3.1.1.</span> <span class="nav-text">基础配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#netflow部分配置"><span class="nav-number">3.1.2.</span> <span class="nav-text">netflow部分配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#config全局状态下配置netflow版本号："><span class="nav-number">3.1.2.1.</span> <span class="nav-text">config全局状态下配置netflow版本号：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#config全局状态下配置netflow服务器地址和端口号："><span class="nav-number">3.1.2.2.</span> <span class="nav-text">config全局状态下配置netflow服务器地址和端口号：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在Cisco系列路由器交换机每个接口上（例如interface-fastethernet0-0；interface-fastethernet0-1等）分别进行配置："><span class="nav-number">3.1.2.3.</span> <span class="nav-text">在Cisco系列路由器交换机每个接口上（例如interface fastethernet0/0；interface fastethernet0/1等）分别进行配置：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Config全局状态下设置时区"><span class="nav-number">3.1.2.4.</span> <span class="nav-text">Config全局状态下设置时区</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#enable状态下设置日期时间"><span class="nav-number">3.1.2.5.</span> <span class="nav-text">enable状态下设置日期时间</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#注意"><span class="nav-number">3.1.2.6.</span> <span class="nav-text">注意:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看命令"><span class="nav-number">3.1.2.7.</span> <span class="nav-text">查看命令</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TOP图"><span class="nav-number">1.</span> <span class="nav-text">TOP图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验目的"><span class="nav-number">2.</span> <span class="nav-text">实验目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验需求"><span class="nav-number">3.</span> <span class="nav-text">实验需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验配置"><span class="nav-number">4.</span> <span class="nav-text">实验配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验验证"><span class="nav-number">5.</span> <span class="nav-text">实验验证</span></a></li></ol></div>
             
 
           </div>
