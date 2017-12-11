@@ -272,6 +272,175 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/03/LACP链路聚合/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gong Min">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyLife">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/03/LACP链路聚合/" itemprop="url">静态LACP模式链路聚合</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-03T17:23:10+08:00">
+                2017-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/路由/" itemprop="url" rel="index">
+                    <span itemprop="name">路由</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="TOP图"><a href="#TOP图" class="headerlink" title="TOP图"></a>TOP图</h2><p><img src="https://i.imgur.com/155OdXx.png" alt=""></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="S1"><a href="#S1" class="headerlink" title="S1"></a>S1</h3><pre><code>[S1]interface Eth-Trunk 1 
+[S1-Eth-Trunk1]mode lacp-static 
+[S1-Eth-Trunk1]quit    
+
+[S1]interface GigabitEthernet 0/0/9 
+[S1-GigabitEthernet0/0/9]eth-trunk 1 
+[S1-GigabitEthernet0/0/9]quit 
+
+[S1]interface GigabitEthernet 0/0/10 
+[S1-GigabitEthernet0/0/10]eth-trunk 1 
+
+[S1]lacp  priority 100 
+[S1]interface GigabitEthernet 0/0/9 
+[S1-GigabitEthernet0/0/9]lacp priority 100 
+[S1-GigabitEthernet0/0/9]quit 
+
+[S1]interface GigabitEthernet 0/0/10 
+[S1-GigabitEthernet0/0/10]lacp priority 100
+</code></pre><h3 id="S2"><a href="#S2" class="headerlink" title="S2"></a>S2</h3><pre><code>[S2]interface Eth-Trunk 1 
+[S2-Eth-Trunk1]mode lacp-static 
+[S2-Eth-Trunk1]quit 
+
+[S2]interface GigabitEthernet 0/0/9 
+[S2-GigabitEthernet0/0/9]eth-trunk 1 
+
+[S2-GigabitEthernet0/0/9]interface GigabitEthernet 0/0/10 
+[S2-GigabitEthernet0/0/10]eth-trunk 1
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/30/防火墙基础配置1——用户上网NAT和服务器负载均衡/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -510,104 +679,14 @@
 
       
         
-          
-            <h2 id="软件包的安装"><a href="#软件包的安装" class="headerlink" title="软件包的安装"></a>软件包的安装</h2><h3 id="python的安装"><a href="#python的安装" class="headerlink" title="python的安装"></a>python的安装</h3><h4 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h4><pre><code>https://www.python.org/downloads/windows/
-从中选一个3以后的版本下载安装
-</code></pre><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><pre><code>打开文件安装，安装完成之后配置环境变量，在path中添加python安装的目录和Scripts比如我的：
-</code></pre><p><img src="https://i.imgur.com/j4gtBfv.jpg" alt=""></p>
-<h4 id="调试python"><a href="#调试python" class="headerlink" title="调试python"></a>调试python</h4><pre><code>打开cmd输入python会出下如下则安装成功：
-</code></pre><p><img src="https://i.imgur.com/yDPmqU4.jpg" alt=""></p>
-<h3 id="setuptools安装"><a href="#setuptools安装" class="headerlink" title="setuptools安装"></a>setuptools安装</h3><p>####　下载地址<br>    <a href="https://pypi.python.org/pypi/setuptools" target="_blank" rel="external">https://pypi.python.org/pypi/setuptools</a><br><img src="https://i.imgur.com/v6EWK0b.jpg" alt=""></p>
-<h4 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h4><pre><code>将文件放至你将要装的地方，然后打开cmd进入该文件夹下输入：
-python setup.py install
-</code></pre><h3 id="pip的安装"><a href="#pip的安装" class="headerlink" title="pip的安装"></a>pip的安装</h3><h4 id="下载地址-1"><a href="#下载地址-1" class="headerlink" title="下载地址"></a>下载地址</h4><pre><code>https://pypi.python.org/pypi/pip
-</code></pre><p><img src="https://i.imgur.com/VLcHMDm.jpg" alt=""></p>
-<h4 id="安装-2"><a href="#安装-2" class="headerlink" title="安装"></a>安装</h4><pre><code>将文件放至你将要装的地方，然后打开cmd进入该文件夹下输入：
-python setup.py install
-</code></pre><h3 id="python-igraph安装"><a href="#python-igraph安装" class="headerlink" title="python-igraph安装"></a>python-igraph安装</h3><pre><code>首先尝试命令安装：pip install python-igraph
-如果不成功则用以下办法。
-</code></pre><h4 id="下载地址-2"><a href="#下载地址-2" class="headerlink" title="下载地址"></a>下载地址</h4><pre><code>http://www.lfd.uci.edu/~gohlke/pythonlibs/#python-igraph
-找到适合自己系统位数和python版本的python-igraph包下载，比如：
-</code></pre><p><img src="https://i.imgur.com/T9XEP7x.jpg" alt=""></p>
-<h4 id="安装-3"><a href="#安装-3" class="headerlink" title="安装"></a>安装</h4><pre><code>将文件放至你将要装的地方，然后打开cmd进入该文件夹下输入：
-pip install 该文件的名字
-如：pip install python_igraph-0.7.1.post6-cp35-none-win_amd64.whl
-</code></pre><h3 id="pycairo包的安装"><a href="#pycairo包的安装" class="headerlink" title="pycairo包的安装"></a>pycairo包的安装</h3><h4 id="下载地址-3"><a href="#下载地址-3" class="headerlink" title="下载地址"></a>下载地址</h4><pre><code>http://www.lfd.uci.edu/~gohlke/pythonlibs/#python-igraph
-如下：
-</code></pre><p><img src="https://i.imgur.com/4Ig8TVQ.jpg" alt=""></p>
-<h4 id="安装-4"><a href="#安装-4" class="headerlink" title="安装"></a>安装</h4><pre><code>将该文件放到python下的Lib/site-packages/cairo中，cairo是自己创建的文件夹。打开cmd进入到该文件夹中输入：
-pip install 文件名（比如：pip install pycairo-1.15.2-cp35-cp35m-win_amd64(1).whl）
-</code></pre><h3 id="python-mysqll连接安装"><a href="#python-mysqll连接安装" class="headerlink" title="python-mysqll连接安装"></a>python-mysqll连接安装</h3><h4 id="命令安装"><a href="#命令安装" class="headerlink" title="命令安装"></a>命令安装</h4><pre><code>pip install pymysql
-</code></pre><h3 id="igraph画图分析网络"><a href="#igraph画图分析网络" class="headerlink" title="igraph画图分析网络"></a>igraph画图分析网络</h3><h4 id="调试igraph"><a href="#调试igraph" class="headerlink" title="调试igraph"></a>调试igraph</h4><p><img src="https://i.imgur.com/m8jH68E.jpg" alt=""><br>    弹出图片：<br><img src="https://i.imgur.com/fN12g4s.jpg" alt=""></p>
-<h4 id="脚本代码"><a href="#脚本代码" class="headerlink" title="脚本代码"></a>脚本代码</h4><pre><code>from igraph import *
-import cairo
-import pymysql
-
-conn=pymysql.connect(host=&apos;192.168.125.130&apos;,user=&apos;root&apos;,passwd=&apos;123456&apos;,db=&apos;mysql&apos;,charset=&apos;utf8&apos;)
-cursor=conn.cursor()
-
-print(conn)
-print(cursor)
-
-g = Graph()
-j=0;ip=[];ip1=[];count=0;ip2=[];ips={};ss=0;ss1=0;s3=[]
-try:
-    # 执行SQL语句
-    cursor.execute(&quot;select srcip,dstip from netflowdata&quot;)
-       # 获取所有记录列表
-    results = cursor.fetchall()
-    for row in results:
-        srcip=row[0]
-        dstip=row[1]
-        ip += [srcip, dstip]
-        #打印结果
-        print(&quot;srcip=%s,dstip=%s&quot; % (srcip,dstip))
-except:
-    print(&quot;Error: unable to fetch data&quot;)
-s=list(ip)
-for x in s:
-    if x not in ip1:
-        ip1.append(x)
-s1=list(ip1)
-for x in s1:
-    ip2+=[(x,ss)]
-    ss=ss+1
-    ips.update(ip2)
-for i in range(len(ips)):
-    count=count+1
-g.add_vertices(count)
-for x in s1:
-    g.vs[ss1][&quot;name&quot;] = x
-    ss1=ss1+1
-g.vs[&quot;label&quot;]=g.vs[&quot;name&quot;]
-try:
-    # 执行SQL语句
-    cursor.execute(&quot;select srcip,dstip from netflowdata&quot;)
-    # 获取所有记录列表
-    results = cursor.fetchall()
-    for row in results:
-        srcip=row[0]
-        dstip=row[1]
-        x=ips[srcip]
-        y=ips[dstip]
-        if (x,y) not in s3:
-            s3+=[(x,y)]
-except:
-    print(&quot;Error: unable to fetch data&quot;)
-for (x,y) in s3:
-    if(x,y) and (y,x) in s3:
-        s3.remove((y,x))
-for (x,y) in s3:
-    g.add_edges([(x,y)])
-summary(g)
-g.vs[&quot;size&quot;]=30
-layout=g.layout(&quot;circle&quot;)
-plot(g,layout=layout)
-# 关闭数据库连接
-conn.close()
-</code></pre><h4 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h4><p><img src="https://i.imgur.com/BiZTahw.jpg" alt=""></p>
-
-          
+          <h2 id="软件包的安装"><a href="#软件包的安装" class="headerlink" title="软件包的安装"></a>软件包的安装</h2><h3 id="python的安装"><a href="#python的安装" class="headerlink" title="python的安装"></a>python的安装</h3><h4 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h4>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/20/igraph画图/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1665,152 +1744,6 @@ conn.close()
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/15/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gong Min">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MyLife">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/15/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-15T13:20:35+08:00">
-                2017-09-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">hexo</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/15/hello-world/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1861,7 +1794,7 @@ conn.close()
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1883,7 +1816,7 @@ conn.close()
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
