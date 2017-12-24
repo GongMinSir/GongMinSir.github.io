@@ -272,6 +272,154 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/24/main/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gong Min">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyLife">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/24/main/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-24T23:20:18+08:00">
+                2017-12-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#!/usr/bin/env python</p>
+<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>import logging<br>logging.getLogger(“scapy.runtime”).setLevel(logging.ERROR)<br>from scapy.all import *<br>import os<br>import struct<br>import array<br>import time<br>import socket<br>import IPy<br>import threading<br>import logging</p>
+<p>class SendPingThr(threading.Thread):<br>    def <strong>init</strong>(self, ipPool, icmpPacket, icmpSocket, timeout=3):<br>        threading.Thread.<strong>init</strong>(self)<br>        self.Sock = icmpSocket<br>        self.ipPool = ipPool<br>        self.packet = icmpPacket<br>        self.timeout = timeout<br>        self.Sock.settimeout( timeout + 3 )<br>    def run(self):<br>        time.sleep(0.01)  #等待接收线程启动<br>        for ip in self.ipPool:<br>            try:<br>                self.Sock.sendto(self.packet, (ip, 0))<br>            except socket.timeout:<br>                break<br>        time.sleep(self.timeout)</p>
+<p>class Nscan:<br>    def <strong>init</strong>(self, timeout=3, IPv6=False):<br>        self.timeout = timeout<br>        self.IPv6 = IPv6<br>        self.<strong>data = struct.pack(‘d’, time.time())   #用于ICMP报文的负荷字节（8bit）<br>        self.</strong>id = os.getpid()   #构造ICMP报文的ID字段，无实际意义<br>    @property#属性装饰器<br>    def <strong>icmpSocket(self):<br>        if not self.IPv6:<br>            Sock = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.getprotobyname(“icmp”))<br>        else:<br>            Sock = socket.socket(socket.AF_INET6, socket.SOCK_RAW, socket.getprotobyname(“ipv6-icmp”))<br>        return Sock<br>    def </strong>inCksum(self, packet):<br>        if len(packet) &amp; 1:<br>            packet = packet + ‘\0’<br>        words=array.array(‘h’,packet)<br>        sum=0<br>        for word in words:<br>            sum += (word &amp; 0xffff)<br>        sum = (sum &gt;&gt; 16) + (sum &amp; 0xffff)<br>        sum = sum + (sum &gt;&gt; 16)<br>        return (~sum) &amp; 0xffff<br>    @property<br>    def <strong>icmpPacket(self):<br>        if not self.IPv6:<br>            header = struct.pack(‘bbHHh’,8,0,0,self.</strong>id,0)#TYPE、CODE、CHKSUM、ID、SEQ<br>        else:<br>            header = struct.pack(‘BbHHh’, 128, 0, 0, self.<strong>id, 0)<br>        packet = header + self.</strong>data#packet without checksum<br>        chkSum = self.<strong>inCksum(packet)#make checksum<br>        if not self.IPv6:<br>            header=struct.pack(‘bbHHh’,8,0,chkSum,self.</strong>id,0)<br>        else:<br>            header=struct.pack(‘BbHHh’,128,0,chkSum,self.<strong>id,0)<br>        return header + self.</strong>data#packet <em>with</em> checksum<br>    def isUnIP(self, IP):<br>        IP = [int(x) for x in IP.split(‘.’) if x.isdigit()]<br>        if len(IP) == 4:<br>            if (0 &lt; IP[0] &lt; 223 and IP[0] != 127 and IP[1] &lt; 256 and IP[2] &lt; 256 and 0 &lt; IP[3] &lt; 255):<br>                return True<br>        return False</p>
+<pre><code>def makeIpPool(self, startIP, lastIP):
+    IPver = 6 if self.IPv6 else 4
+    intIP = lambda ip: IPy.IP(ip).int()
+    ipPool = {IPy.intToIp(ip, IPver) for ip in range(intIP(startIP), intIP(lastIP)+1)}
+    return {ip for ip in ipPool if self.isUnIP(ip)}
+
+def mPing(self,ipPool):
+    Sock = self.__icmpSocket
+    Sock.settimeout(self.timeout)
+    packet = self.__icmpPacket
+    recvFroms = set()#接收线程的来源IP地址容器
+    sendThr = SendPingThr(ipPool, packet, Sock, self.timeout)
+    sendThr.start()
+    while True:
+        try:
+            recvFroms.add(Sock.recvfrom(1024)[1][0])
+        except Exception:
+            pass
+        finally:
+            if not sendThr.isAlive():
+                break
+    return recvFroms &amp; ipPool
+</code></pre><p>def syn(dst_ip):<br>    dst_port=445<br>    src_port = RandShort()<br>    s=sr1(IP(dst=dst_ip)/TCP(sport=src_port,dport=dst_port,flags=”S”),timeout=3,verbose=False)<br>    if(str(s)==”None”):<br>     print “                         <em>.The computer is Closed”<br>    elif(s.haslayer(TCP)):<br>        if(s.getlayer(TCP).flags == 0x12):<br>            print “                         </em>.The computer is Open”<br>        elif (s.getlayer(TCP).flags == 0x14):<br>            print “                         <em>.The computer is Open”<br>    elif(s.haslayer(ICMP)):<br>        if(int(s.getlayer(ICMP).type)==3 and int(s.getlayer(ICMP).code) in [1,2,3,9,10,13]):<br>            print “                         </em>.The computer is Filtered”</p>
+<p>def syns(ippool):<br>    dst_port=445<br>    src_port = RandShort()<br>    i=0;<br>    for ip in ippool:<br>        s=sr1(IP(dst=ip)/TCP(sport=src_port,dport=dst_port,flags=”S”),timeout=0.5,verbose=False)<br>        if(str(s)==”None”):<br>            i=i+1<br>        elif(s.haslayer(TCP)):<br>            if(s.getlayer(TCP).flags == 0x12):<br>                print “                         <em>.The computer:  “+ip+”    is Open”<br>            elif (s.getlayer(TCP).flags == 0x14):<br>                print “                         </em>.The computer:  “+ip+”    is Open”<br>        elif(s.haslayer(ICMP)):<br>            if(int(s.getlayer(ICMP).type)==3 and int(s.getlayer(ICMP).code) in [1,2,3,9,10,13]):<br>                print “                         <em>.The computer:  “+ip+”    is Filtered”<br>    print “                         </em>.The Other “+str(i)+” computers are Closed”</p>
+<p>if <strong>name</strong>==’<strong>main</strong>‘:<br>    print “”<br>    print “<em> </em> <em> </em> <em> </em> <em> </em> <em> </em><welcome to="" host="" activity="" detection="" system=""><em> </em> <em> </em> <em> </em> <em> </em> <em>“<br>    print “</em>                             Author:cheng shun jie                           <em>“<br>    print “</em>       -Introduction of the program:                                         <em>“<br>    print “</em>                   1.The program Based on ICMP host activity detection.      <em>“<br>    print “</em>                   2.The program Based on SYN host activity detection.       <em>“<br>    print “</em>                   3.The program Based on ARP host activity detection.       <em>“<br>    print “</em>       -Program operation hints:                                             <em>“<br>    print “</em>                   <em>.Select the above number of ordinal numbers.             </em>“<br>    print “<em>                   </em>.The program can detect the Single IP address.           <em>“<br>    print “</em>                   <em>.The program can detect the IP address pool.             </em>“<br>    print “<em>                   </em>.The program can detect what kind of system the host is. <em>“<br>    print “</em>                   <em>.Please input seaduslik IP adderss.                      </em>“<br>    print “<em>                   </em>.The program’s detection system technology is limited,   <em>“<br>    print “</em>                   so it is possible to detect the categories of the system  <em>“<br>    print “</em>                   to be wrong.                                              <em>“<br>    print “</em> <em> </em> <em> </em> <em> </em> <em> </em> <em> </em> <em> </em> <em> </em> <em> </em> <em> </em> <em> </em> <em> </em> <em> </em> <em> </em> <em> </em> <em> </em> <em> </em> <em> </em> <em> </em> <em> </em> <em>“<br>    s=input(“Please select the program of number[1(ICMP)/2(SYN)/3(ARP)/0(exit)]:”)<br>    print “”<br>    while s!=0:<br>        if(s==1):<br>            s0=input(“Please select the <icmp> program of number[4(single)/5(pool)/0(exit)]:”)<br>            while(s0!=0):<br>                if(s0==4):<br>                    pass<br>                elif(s0==5):<br>                    stip=input(“                    &lt;</icmp></em>&gt;Please input icDstation_start IP:”)<br>                    endip=input(“                    &lt;<em>&gt;Please input icDstation_end   IP:”)<br>                    s = Nscan()<br>                    ipPool = s.makeIpPool(stip,endip)<br>                    se=s.mPing(ipPool)<br>                    for i in se:<br>                        print “                         The computer:  “+i+”    is Open!”<br>                    print “                         </em>.Other computer is closed!”<br>                else:<br>                    print “                    [!]Error,Please rechoose!”<br>                print “”<br>                s0=input(“Please select the <icmp> program of number[4(single)/5(pool)/0(exit)]:”)<br>        elif(s==2):<br>            s1=input(“Please select the <syn> program of number[6(single)/7(pool)/0(exit)]:”)<br>            while(s1!=0):<br>                if(s1==6):<br>                    ip=input(“                    &lt;<em>&gt;Please input sDstation IP:”)<br>                    syn(ip)<br>                elif(s1==7):<br>                    staip=input(“                    &lt;</em>&gt;Please input sDstation start_IP:”)<br>                    endip=input(“                    &lt;<em>&gt;Please input sDstation   end_IP:”)<br>                    s = Nscan()<br>                    synipPool = s.makeIpPool(staip,endip)<br>                    syns(synipPool)<br>                else:<br>                    print “                    [!]Error,Please rechoose!”<br>                print “”<br>                s1=input(“Please select the <syn> program of number[6(single)/7(pool)/0(exit)]:”)<br>        elif(s==3):<br>            s2=input(“Please select the <arp> program of number[8(single)/9(pool)/0(exit)]:”)<br>            while(s2!=0):<br>                if(s2==8):<br>                    pass<br>                elif(s2==9):<br>                    pass<br>                else:<br>                    print “                    [!]Error,Please rechoose!”<br>                print “”<br>                s2=input(“Please select the <arp> program of number[8(single)/9(pool)/0(exit)]:”)<br>        else:<br>            print “                    [!]Error,Please rechoose!”<br>        print “”<br>        s=input(“Please select the program of number[1(ICMP)/2(SYN)/3(ARP)/0(exit)]:”)<br>        print “”<br>    print “                    &lt;</arp></arp></syn></em>&gt;The Program is Over!”</syn></icmp></welcome></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/03/LACP链路聚合/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1598,152 +1746,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/16/路由重分布/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gong Min">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MyLife">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/16/路由重分布/" itemprop="url">路由的重分布</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-16T14:30:20+08:00">
-                2017-09-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/路由/" itemprop="url" rel="index">
-                    <span itemprop="name">路由</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="TOP图"><a href="#TOP图" class="headerlink" title="TOP图"></a>TOP图</h2><p><img src="https://i.imgur.com/XoUYa0m.png" alt=""><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/16/路由重分布/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1794,7 +1796,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
